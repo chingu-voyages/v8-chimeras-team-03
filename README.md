@@ -1,3 +1,5 @@
+![enter image description here](https://vignette.wikia.nocookie.net/dragonsdogma/images/0/06/Chimera01.png/revision/latest?cb=20120615060217)
+
 # v8-chimeras-team-03
 
 Add-project-description-here | Voyage-8 | https://chingu.io/
