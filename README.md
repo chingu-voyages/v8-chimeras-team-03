@@ -13,14 +13,14 @@ development branch
 
 # Chimeras team 03
 
-- [] Choose project
-- [] Define MVP
-- [] Choose tech stack
-- [] Write all functions and features
-- [] Prioritize tasks
-- [] Make general plan (What needs to be done for every week)
-- [] Choose project management tool (Trello/Zen Hub etc)
-- [] Make more detailed plan for the next two weeks (Sprint 1 and 2), including list of very detailed small tasks, and assign tasks to all team members
+- [ ] Choose project
+- [ ] Define MVP
+- [ ] Choose tech stack
+- [ ] Write all functions and features
+- [ ] Prioritize tasks
+- [ ] Make general plan (What needs to be done for every week)
+- [ ] Choose project management tool (Trello/Zen Hub etc)
+- [ ] Make more detailed plan for the next two weeks (Sprint 1 and 2), including list of very detailed small tasks, and assign tasks to all team members
 - [] Git strategy
 - [] Team workflow
 
