@@ -4,33 +4,30 @@
 
 Add-project-description-here | Voyage-8 | https://chingu.io/
 
-test 1 Milos
-test 2 Piotr
-test 3 grzybek6
-test 4 Efe
-
-development branch
-
-/////////////////////////
-
 # Chimeras team 03
 
-- [ ] Choose project
-- [ ] Define MVP
-- [ ] Choose tech stack
+- [x] Choose project
+- [x] Define MVP
+- [x] Choose tech stack
 - [ ] Write all functions and features
 - [ ] Prioritize tasks
 - [ ] Make general plan (What needs to be done for every week)
-- [ ] Choose project management tool (Trello/Zen Hub etc)
+- [x] Choose project management tool (Trello/Zen Hub etc)
 - [ ] Make more detailed plan for the next two weeks (Sprint 1 and 2), including list of very detailed small tasks, and assign tasks to all team members
-- [] Git strategy
-- [] Team workflow
+- [x] Git strategy
+- [x] Team workflow
 
 ## Choose project
 
+Toggl clone https://toggl.com
+
 ## Define MVP (minimal viable product), including mockup
 
+A simple form with text input box (to define what you are working on) and a "start" button which start the timer and changes to "stop" button. When the button is pressed, the request is sent to our backend to register the event. The server sends back the event ID. No authentication.
+
 ## Choose tech stack (and architecture of the project)
+
+MERN stack
 
 ### \*testing tool
 
@@ -63,6 +60,8 @@ development branch
 ### Sprint 8
 
 ## Choose project management tool (Trello/Zen Hub/Git hub project board etc)
+
+Trello
 
 ## Detailed plan for the next two weeks:
 
