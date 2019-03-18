@@ -4,7 +4,7 @@
 
 Add-project-description-here | Voyage-8 | https://chingu.io/
 
-# Our desing
+# Our design
 
 https://xd.adobe.com/spec/f3dc7539-aaa3-481c-6115-56a14b98bd63-85ed/
 
