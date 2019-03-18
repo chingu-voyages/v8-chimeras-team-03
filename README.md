@@ -4,6 +4,13 @@
 
 Add-project-description-here | Voyage-8 | https://chingu.io/
 
+# team members
+
+- [bikilone](https://github.com/bikilone)
+- [vai91](https://github.com/vai91)
+- [JohnGIDoe](https://github.com/JohnGIDoe)
+- [pgrzego](https://github.com/pgrzego)
+
 # Our design
 
 https://xd.adobe.com/spec/f3dc7539-aaa3-481c-6115-56a14b98bd63-85ed/
