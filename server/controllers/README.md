@@ -1,1 +1,4 @@
-I suggest that this directory should have at least two controllers which are userController and taskController which going to store all the functions we need to implement for users and tasks like add, update, delete etc.
+This folder is used for controllers.
+
+## Naming concention
+As we have splitted controllers, models and middlewares into seperate folders I suggest we should name controllers files using camelCase. For example <code>user.js</code> or <code>todoList</code> etc.
