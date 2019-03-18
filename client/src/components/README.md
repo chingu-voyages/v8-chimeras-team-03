@@ -8,7 +8,7 @@ This folder is used only for stateless (functional) components.
 
 ## Folder structure
 
-- Container folder
+- Component folder
   - Page name folder
     - Component name folder
       - Component.js file
