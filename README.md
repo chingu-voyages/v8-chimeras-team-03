@@ -8,9 +8,9 @@ Add-project-description-here | Voyage-8 | https://chingu.io/
 
 https://xd.adobe.com/spec/f3dc7539-aaa3-481c-6115-56a14b98bd63-85ed/
 
-You can click on any artboard (there are 3 groups for different views, mobile, tablet and desktop), and there are at least 4 sub-groups for each artboard (depending on the page), for exapmle there are landing page, sign up and home page. For mobile there is one additional artboard (when the user clicks on the hamburger meny on the right side)
+You can click on any artboard (there are 3 groups for different views, mobile, tablet and desktop), and there are at least 4 sub-groups for each page, there are landing page, sign up, log in and home page. For mobile there is one additional artboard (when the user clicks on the hamburger menu on the right side)
 Inside each artboard you could click on any element and you will get css specs (margin, width, border etc..)
-Also you could click on color on the right side, and the hexadecimal color code will be automaticly copied to your clipboard
+Also you could click on color on the right side, and the hexadecimal color code will be automaticly copied to your clipboard.
 
 # Chimeras team 03
 
