@@ -9,8 +9,11 @@ This folder is used only for stateless (functional) components.
 ## Folder structure
 
 - Component folder
+
   - Page name folder
     - Component name folder
       - Component.js file
-      - Component.module.css file [more on the module.css](https://facebook.github.io/create-react-app/docs/adding-a-css-modules-stylesheet)
+      - Component.scss file [more on the scss](https://sass-lang.com/guide)
       - Component.test.js
+
+  Some components can be oustside page name folder like App.js
