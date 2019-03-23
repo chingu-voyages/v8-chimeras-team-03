@@ -1,8 +1,8 @@
 ![enter image description here](https://vignette.wikia.nocookie.net/dragonsdogma/images/0/06/Chimera01.png/revision/latest?cb=20120615060217)
 
-# To install all packages run: npm run install-all
+# To install all packages run: npm install
 
-# To start dev server run: npm run dev
+# To start client && server run: npm start
 
 # v8-chimeras-team-03
 
