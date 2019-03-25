@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const fireBase = require('./models/tasks.js');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -12,12 +13,17 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.send('Welcome to Express :)');
-});
+app.use(bodyParser.json());
 
 app.get("/tasks/", (req, res) => {
-  res.json(fireBase.getTasks());
+
+  fireBase.getTask((err, task) => {
+    res.send(
+      JSON.stringify({
+      task: err ? [] : task
+    }));
+  })
+
 });
 
 app.listen(port, () => {

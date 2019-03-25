@@ -1,7 +1,7 @@
-const practiceSolution = require('./users.js');
+const user = require('./users.js');
 
-describe('practiceSolution', function() {
+describe('addUser', function() {
   it('should be a function', function() {
-    expect(practiceSolution).toBeInstanceOf(Function);
+    expect(user.addUser).toBeInstanceOf(Function);
   });
 });

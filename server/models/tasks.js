@@ -8,18 +8,14 @@ admin.initializeApp({
 
 var db = admin.firestore();
 
-function getTasks() {
-  db.collection('tasks').get()
-  .then((snapshot) => {
-    snapshot.forEach((doc) => {
-      console.log(doc.id, '=>', doc.data());
-    });
+function getTask(cb) {
+  db.collection('tasks').get('one')
+  .then(doc => {
+    cb(null, doc);
   })
-  .catch((err) => {
-    console.log('Error getting documents', err);
-  });
+  .catch((err) => cb(err))
 }
 
 module.exports = {
-  getTasks: getTasks,
+  getTask: getTask,
 }
