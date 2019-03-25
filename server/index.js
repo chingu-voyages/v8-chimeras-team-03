@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-app.get("/tasks/", (req, res) => {
+app.get("/", (req, res) => {
 
   res.send("Backend Server works");
 
