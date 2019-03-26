@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -11,8 +12,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.send('Welcome to Express :)');
+app.use(bodyParser.json());
+
+app.get("/", (req, res) => {
+
+  res.send("Backend Server works");
+
 });
 
 app.listen(port, () => {
