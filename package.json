@@ -5,12 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest server && cd client && npm test",
-    "client-install": "cd client && npm install",
-    "server-install": "cd server && npm install",
-    "install-all": "concurrently \"npm run client-install\" \"npm run server-install\"",
-    "server": "nodemon index --prefix server",
+    "server": "npm start --prefix server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "postinstall": "cd server && npm install && cd ../client && npm install"
   },
   "repository": {
     "type": "git",
