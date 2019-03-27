@@ -11,12 +11,19 @@
   img {
     width: 32px;
     height: 32px;
+    @media screen and(min-width: 1280px) {
+      width: 41px;
+      height: 41px;
+    }
   }
   h1 {
     margin-left: 8px;
     font-family: "Arial";
     font-weight: 900;
     font-size: 20px;
+    @media screen and(min-width: 1280px) {
+      font-size: 25px;
+    }
   }
   .nav {
     display: none;
