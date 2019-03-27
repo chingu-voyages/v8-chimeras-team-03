@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Arial";
   /* this rules are set to prevent any default margin and padding elements could have
 and box-sizing is set to border box (in this way when you set some width or height, 
 you are seting it directly on the whole box not only on the content more on that here :
