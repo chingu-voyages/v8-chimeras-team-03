@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import "./LandingPage.scss";
 import video from "../../assets/video.mp4";
 
 export default class LandingPage extends Component {
   componentDidMount() {
     this.refs.video.play();
-    var node = ReactDOM.findDOMNode(this.refs.landing);
   }
   render() {
     return (

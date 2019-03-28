@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { Route, Switch } from "react-router-dom";
 import "./App.scss";
 import LandingPage from "../../components/LandingPage/LandingPage";
@@ -11,13 +10,8 @@ import DropDown from "../../components/DropDown/DropDown";
 
 class App extends Component {
   state = {
-    dropDown: false,
-    height: "100%"
+    dropDown: false
   };
-
-  componentDidMount() {
-    // console.log(this.refs.parent.);
-  }
 
   showDropDown = () => {
     this.setState({
