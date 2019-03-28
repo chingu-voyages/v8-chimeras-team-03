@@ -3,6 +3,9 @@
   justify-content: space-between;
   width: 100%;
   margin-top: 32px;
+  a {
+    text-decoration: none;
+  }
   .logo {
     display: flex;
     flex-direction: row;
@@ -24,6 +27,7 @@
     font-family: "Arial";
     font-weight: 900;
     font-size: 20px;
+    color: black;
     @media screen and(min-width: 1280px) {
       font-size: 25px;
     }

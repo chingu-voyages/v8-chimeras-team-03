@@ -8,10 +8,12 @@ export default function Header(props) {
   const { showDropDown } = props;
   return (
     <div className="header">
-      <div className="logo">
-        <img src={logo} alt="Logo" />
-        <h1>toggl clone</h1>
-      </div>
+      <Link to="/">
+        <div className="logo">
+          <img src={logo} alt="Logo" />
+          <h1>toggl clone</h1>
+        </div>
+      </Link>
       <HamburgerMenu showDropDown={showDropDown} />
       <div className="nav">
         <ul>
