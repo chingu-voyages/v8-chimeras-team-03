@@ -2,15 +2,6 @@ $grey: #e3e8eb;
 $green: #88cf8f;
 $red: #e1393f;
 
-.background-green {
-  position: absolute;
-  background-color: $green;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -2;
-}
 .background-grey {
   background-color: $grey;
   position: absolute;
@@ -18,7 +9,8 @@ $red: #e1393f;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 1;
+  overflow: visible;
   @media screen and (min-width: 768px) {
     top: 353px;
   }
@@ -29,15 +21,18 @@ $red: #e1393f;
 
 .login {
   text-align: center;
+  background-color: $green;
+  overflow: auto;
+  min-height: 100vh;
   h1 {
     color: white;
     font-size: 30px;
-    margin-top: 56px;
+    margin-top: 117px;
     @media screen and (min-width: 768px) {
-      margin-top: 59px;
+      margin-top: 124px;
     }
     @media screen and (min-width: 1280px) {
-      margin-top: 81px;
+      margin-top: 169px;
       font-size: 35px;
     }
   }
@@ -51,6 +46,8 @@ $red: #e1393f;
     }
   }
   .no-acc {
+    z-index: 3;
+    position: relative;
     color: black;
     font-size: 14px;
     opacity: 1;
@@ -59,6 +56,8 @@ $red: #e1393f;
   }
   button {
     // last button on the page
+    z-index: 3;
+    position: relative;
     width: 225px;
     height: 33px;
     border: none;
@@ -101,6 +100,8 @@ $red: #e1393f;
 }
 
 .form {
+  z-index: 2;
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 316px;

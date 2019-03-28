@@ -33,8 +33,6 @@ class LoginPage extends Component {
             SIGN UP FOR FREE <span />
           </Link>
         </button>
-        <div className="background-green" />
-        <div className="background-grey" />
       </div>
     );
   }
