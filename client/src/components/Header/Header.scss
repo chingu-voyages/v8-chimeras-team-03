@@ -1,0 +1,65 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 32px;
+  a {
+    text-decoration: none;
+  }
+  .logo {
+    display: flex;
+    flex-direction: row;
+    margin-left: 37px;
+  }
+  img {
+    width: 32px;
+    height: 32px;
+    @media screen and (min-width: 768px) {
+      margin-left: 80px;
+    }
+    @media screen and(min-width: 1280px) {
+      width: 41px;
+      height: 41px;
+    }
+  }
+  h1 {
+    margin-left: 8px;
+    font-family: "Arial";
+    font-weight: 900;
+    font-size: 20px;
+    color: black;
+    @media screen and(min-width: 1280px) {
+      font-size: 25px;
+    }
+  }
+  .nav {
+    display: none;
+    @media screen and(min-width: 768px) {
+      display: inline-block;
+      width: 50%;
+      ul {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        list-style: none;
+        margin-right: 64px;
+
+        margin-top: 10px;
+        li {
+          a {
+            color: black;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            @media screen and (min-width: 1280px) {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

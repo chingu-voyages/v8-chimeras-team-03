@@ -1,0 +1,263 @@
+$grey: #e3e8eb;
+$green: #88cf8f;
+$red: #e1393f;
+
+.background-grey {
+  background-color: $grey;
+  position: absolute;
+  top: 368px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: visible;
+  @media screen and (min-width: 768px) {
+    top: 353px;
+  }
+  @media screen and (min-width: 1280px) {
+    top: 476px;
+  }
+}
+
+.login {
+  text-align: center;
+  background-color: $green;
+  overflow: auto;
+  min-height: 100vh;
+  h1 {
+    color: white;
+    font-size: 30px;
+    margin-top: 117px;
+    @media screen and (min-width: 768px) {
+      margin-top: 124px;
+    }
+    @media screen and (min-width: 1280px) {
+      margin-top: 169px;
+      font-size: 35px;
+    }
+  }
+  p {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-top: 10px;
+    color: white;
+    @media screen and (min-width: 1280px) {
+      font-size: 20px;
+    }
+  }
+  .no-acc {
+    z-index: 3;
+    position: relative;
+    color: black;
+    font-size: 14px;
+    opacity: 1;
+    font-weight: bold;
+    margin-top: 34px;
+  }
+  button {
+    // last button on the page
+    z-index: 3;
+    position: relative;
+    width: 225px;
+    height: 33px;
+    border: none;
+    outline: none;
+    border-radius: 17px;
+    background-color: white;
+    margin-top: 20px;
+    @media screen and (min-width: 768px) {
+      width: 353px;
+    }
+    @media screen and (min-width: 1280px) {
+      width: 518px;
+      height: 49px;
+      margin-top: 39px;
+    }
+    a {
+      text-decoration: none;
+      color: black;
+      font-size: 14px;
+      font-weight: bold;
+      @media screen and (min-width: 1280px) {
+        font-size: 20px;
+      }
+      span {
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 5px solid black;
+        display: inline-block;
+        margin-left: 4px;
+        @media screen and (min-width: 1280px) {
+          border-top: 7px solid transparent;
+          border-bottom: 7px solid transparent;
+          border-left: 7px solid black;
+        }
+      }
+    }
+  }
+}
+
+.form {
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 316px;
+  height: 402px;
+  background-color: white;
+  margin: 0 auto;
+  padding-left: 44px;
+  padding-right: 44px;
+  padding-top: 34px;
+  border: 1px solid #707070;
+  text-align: left;
+  margin-top: 50px;
+  @media screen and (min-width: 768px) {
+    margin-top: 80px;
+    width: 441px;
+    height: 447px;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-top: 82px;
+    width: 653px;
+    height: 706px;
+    padding: 50px 65px 0 65px;
+  }
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    @media screen and (min-width: 1280px) {
+      font-size: 22px;
+    }
+  }
+  input {
+    background-color: $grey;
+    width: 228px;
+    height: 36px;
+    outline: none;
+    border: 1px solid #707070;
+    padding-left: 10px;
+    font-size: 13px;
+    margin-top: 9px;
+    margin-bottom: 9px;
+    @media screen and (min-width: 768px) {
+      width: 353px;
+      margin-bottom: 34px;
+    }
+    @media screen and (min-width: 1280px) {
+      width: 522px;
+      height: 54px;
+      font-size: 14px;
+    }
+  }
+  p {
+    // forgot password
+    font-size: 14px;
+    text-decoration: underline;
+    font-weight: bold;
+    color: black;
+    opacity: 1;
+    margin-top: 34px;
+    @media screen and (min-width: 768px) {
+      margin-top: 16px;
+    }
+  }
+  .log-in-btn {
+    background-color: $red;
+    border: none;
+    outline: none;
+    margin-top: 23px;
+    width: 225px;
+    height: 33px;
+    border-radius: 17px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    @media screen and (min-width: 768px) {
+      width: 350px;
+    }
+    @media screen and (min-width: 1280px) {
+      width: 518px;
+      height: 49px;
+      font-size: 20px;
+      margin-top: 50px;
+      margin-bottom: 29px;
+    }
+    span {
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 5px solid white;
+      display: inline-block;
+      margin-left: 4px;
+      @media screen and (min-width: 1280px) {
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-left: 7px solid white;
+      }
+    }
+  }
+  .log-in-google-btn {
+    border: 1px solid black;
+    outline: none;
+    width: 225px;
+    height: 33px;
+    border-radius: 17px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    background-color: white;
+    margin-top: 18px;
+    @media screen and (min-width: 768px) {
+      width: 350px;
+    }
+    @media screen and (min-width: 1280px) {
+      width: 518px;
+      height: 49px;
+      font-size: 20px;
+      margin-top: 47px;
+    }
+    span {
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 5px solid black;
+      display: inline-block;
+      margin-left: 4px;
+      @media screen and (min-width: 1280px) {
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-left: 7px solid white;
+      }
+    }
+  }
+  .or {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 18px;
+    opacity: 0.5;
+    p {
+      text-decoration: none;
+      margin-top: 0;
+      margin-left: 4px;
+      margin-right: 4px;
+      @media screen and (min-width: 1280px) {
+        font-size: 20px;
+      }
+    }
+    .hr {
+      border: 1px solid black;
+      width: 100px;
+      height: 1px;
+      @media screen and (min-width: 1280px) {
+        width: 200px;
+      }
+    }
+  }
+}
