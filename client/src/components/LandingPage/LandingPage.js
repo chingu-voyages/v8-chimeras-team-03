@@ -4,7 +4,7 @@ import video from "../../assets/video.mp4";
 
 export default class LandingPage extends Component {
   componentDidMount() {
-    this.refs.video.play();
+    this.refs.video.play(); // should be changed
   }
   render() {
     return (
