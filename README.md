@@ -1,8 +1,15 @@
 ![enter image description here](https://vignette.wikia.nocookie.net/dragonsdogma/images/0/06/Chimera01.png/revision/latest?cb=20120615060217)
 
-# To install all packages run: npm install
+# Installation and configuration
 
-# To start client && server run: npm start
+ 1. Run your terminal and clone this repository: `git clone https://github.com/chingu-voyages/v8-chimeras-team-03.git`
+ 2. Change directory: `cd v8-chimeras-team-03`
+ 3. Install all dependencies: `npm install`
+ 4. Configure your local server:
+   - Go in the server directory: `cd server`
+   - Copy example configuration file: `cp .env.example .env`
+   - Modify the `.env` file to match your environment settings
+ 5. Start client and server (from the main project directory): `npm start`
 
 # v8-chimeras-team-03
 
