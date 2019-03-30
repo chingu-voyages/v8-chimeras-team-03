@@ -11,7 +11,7 @@ import DropDown from "../../components/DropDown/DropDown";
 class App extends Component {
   state = {
     dropDown: false,
-    isUserLogged: true
+    isUserLogged: false
   };
 
   showDropDown = () => {
