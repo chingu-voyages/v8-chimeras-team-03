@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import "./App.scss";
 import LandingPage from "../../components/LandingPage/LandingPage";
 import SignUpPage from "../SignUpPage/SignUpPage";
@@ -11,7 +11,7 @@ import DropDown from "../../components/DropDown/DropDown";
 class App extends Component {
   state = {
     dropDown: false,
-    isUserLogged: false
+    isUserLogged: true
   };
 
   showDropDown = () => {
@@ -35,17 +35,21 @@ class App extends Component {
         ) : isUserLogged ? (
           <div>
             <Switch>
-              <Route exact path="/dashboard" component={DashboardPage} />
-              <Route path="*" component={() => "404 NOT FOUND"} />
+              <Route path="/" component={DashboardPage} />
             </Switch>
           </div>
         ) : (
           <div>
             <Header showDropDown={showDropDown} />
             <Switch>
-              <Route exact path="/" component={LandingPage} />
+              <Redirect
+                from="/dashboard"
+                to="/"
+                render={() => <LandingPage />}
+              />
               <Route exact path="/signup" component={SignUpPage} />
               <Route exact path="/login" component={LoginPage} />
+              <Route path="/" component={LandingPage} />
             </Switch>
           </div>
         )}
