@@ -6,10 +6,9 @@
  2. Change directory: `cd v8-chimeras-team-03`
  3. Install all dependencies: `npm install`
  4. Configure your local server:
-   - Go in the server directory: `cd server`
    - Copy example configuration file: `cp .env.example .env`
    - Modify the `.env` file to match your environment settings
- 5. Start client and server (from the main project directory): `npm start`
+ 5. Start app (from the main project directory): `npm start`
 
 # v8-chimeras-team-03
 
@@ -123,4 +122,3 @@ Trello
 - Office Hours
 
 - Shared Calendar
-
