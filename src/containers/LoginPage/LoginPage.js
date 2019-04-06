@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./LoginPage.scss";
 import { auth, provider } from "../../components/Firebase/firebase";
-import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import App from "../App/App";
 
 class LoginPage extends Component {

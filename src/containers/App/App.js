@@ -7,7 +7,7 @@ import DashboardPage from "../DashboardPage/DashboardPage";
 import LoginPage from "../LoginPage/LoginPage";
 import Header from "../../components/Header/Header";
 import DropDown from "../../components/DropDown/DropDown";
-import { auth, provider } from "../../components/Firebase/firebase";
+import { auth } from "../../components/Firebase/firebase";
 
 
 class App extends Component {
@@ -86,7 +86,7 @@ class App extends Component {
           {this.state.user ?
             <div>
               <div className='user-profile'>
-                <img src={this.state.user.photoURL} />
+                <img src={this.state.user.photoURL} alt="Your profile avatar"/>
               </div>
             </div>
           :

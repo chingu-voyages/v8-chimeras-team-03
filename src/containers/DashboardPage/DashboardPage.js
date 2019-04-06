@@ -57,6 +57,7 @@ class DashboardPage extends Component {
         taskName: this.state.taskName,
         startTime: this.state.startTime
       });
+      // eslint-disable-next-line
       let taskId = this.setState({
         taskId: push.key
       });;
