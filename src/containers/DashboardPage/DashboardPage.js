@@ -9,7 +9,7 @@ import fire from "../../components/Firebase/firebase";
 class DashboardPage extends Component {
   state = {
     startTask: true, // check if task should start or end
-    id: 'diffrentUserID', // mock for id
+    id: this.props.user.uid, // mock for id
     taskId: '',
     startTime: 0, // start time in miliseconds
     endTime: 0, // end time in milliseconds
@@ -20,7 +20,8 @@ class DashboardPage extends Component {
       hours: "00",
       minutes: "00",
       seconds: "00"
-    }
+    },
+    user: null
   };
 
   onTimerClick = () => {

@@ -25,9 +25,6 @@ const config =
 
 let Firebase = app.initializeApp(config);
 
-// *** database API ***
-
-
 // *** Auth API ***
 
   // doCreateUserWithEmailAndPassword = (email, password) =>
@@ -42,6 +39,7 @@ let Firebase = app.initializeApp(config);
   //
   // doPasswordUpdate = password =>
   //   this.auth.currentUser.updatePassword(password);
-
+export const provider = new app.auth.GoogleAuthProvider();
+export const auth = app.auth();
 
 export default Firebase;
