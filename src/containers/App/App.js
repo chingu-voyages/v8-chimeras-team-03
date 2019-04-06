@@ -13,7 +13,7 @@ import { auth, provider } from "../../components/Firebase/firebase";
 class App extends Component {
   constructor(){
     super();
-    this.logout = this.logout.bind(this); // <-- add this line
+    this.logout = this.logout.bind(this);
     this.state = {
       dropDown: false,
       user: false
@@ -73,14 +73,25 @@ class App extends Component {
     return (
 
       <div>
-        <div className="wrapper">
+        <div className='app1'>
+          <header>
+            <div className="wrapper">
+              {this.state.user ?
+                <button onClick={this.logout}>Logout</button>
+                  :
+                <div></div>
+              }
+            </div>
+          </header>
           {this.state.user ?
             <div>
-            <h2>{this.state.user.displayName}</h2>
-            <button onClick={this.logout}>Log Out</button>
+              <div className='user-profile'>
+                <img src={this.state.user.photoURL} />
+              </div>
             </div>
-            :
-            <div></div>
+          :
+            <div>
+            </div>
           }
         </div>
         {this.state.dropDown ? (

@@ -1,6 +1,7 @@
 .dashboard {
   display: flex;
   justify-content: space-between;
+  background-color: #ce98df;
   .menu {
     display: flex;
     flex-direction: column;
@@ -41,6 +42,7 @@
       height: 49px;
       align-items: center;
       justify-content: space-between;
+      background-color: #fff;
       box-shadow: rgba($color: #000000, $alpha: 0.16) 0 3px 6px;
       input {
         flex-grow: 1;
