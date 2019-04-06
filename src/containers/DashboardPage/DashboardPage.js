@@ -21,7 +21,7 @@ class DashboardPage extends Component {
       minutes: "00",
       seconds: "00"
     },
-    user: null
+    user: this.props.user
   };
 
   onTimerClick = () => {

@@ -13,7 +13,6 @@ import { auth, provider } from "../../components/Firebase/firebase";
 class App extends Component {
   constructor(){
     super();
-    this.login = this.login.bind(this); // <-- add this line
     this.logout = this.logout.bind(this); // <-- add this line
     this.state = {
       dropDown: false,
@@ -31,17 +30,6 @@ class App extends Component {
   //   dropDown: false,
   //   isUserLogged: false
   // };
-
-
-  login() {
-    auth.signInWithPopup(provider)
-    .then((result) => {
-      const user = result.user;
-      this.setState({
-        user
-      });
-    });
-  }
 
   logout() {
     auth.signOut()
@@ -67,9 +55,8 @@ class App extends Component {
   render() {
     const { showDropDown, hideDropDown } = this;
     const { user } = this.state;
-    const { name } = this.state.user;
     const renderMergedProps = (component, ...rest) => {
-      const finalProps = Object.assign({}, ...rest);
+    const finalProps = Object.assign({}, ...rest);
       return (
         React.createElement(component, finalProps)
       );
@@ -93,7 +80,7 @@ class App extends Component {
             <button onClick={this.logout}>Log Out</button>
             </div>
             :
-            <button onClick={this.login}>Log In with Google</button>
+            <div></div>
           }
         </div>
         {this.state.dropDown ? (

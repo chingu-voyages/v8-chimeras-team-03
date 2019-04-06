@@ -1,11 +1,41 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./LoginPage.scss";
+import { auth, provider } from "../../components/Firebase/firebase";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import App from "../App/App";
 
 class LoginPage extends Component {
+  constructor(){
+    super();
+    this.login = this.login.bind(this);
+    this.state = {
+      user: null
+    }
+  }
+  login() {
+    auth.signInWithPopup(provider)
+    .then((result) => {
+      const user = result.user;
+      this.setState({
+        user
+      });
+    });
+
+  }
   render() {
     return (
+
       <div className="login">
+        {this.state.user ?
+        <Redirect
+          from="/LoginPage"
+          to="/"
+          render={() => <App user={this.state.user}/>}
+        />
+      :
+      <div></div>
+    }
         <h1>Get tracking</h1>
         <p>Log in to your Toggl account.</p>
         <form className="form">
@@ -22,7 +52,7 @@ class LoginPage extends Component {
             <p>OR</p>
             <div className="hr" />
           </div>
-          <button className="log-in-google-btn">
+          <button onClick={this.login} className="log-in-google-btn">
             LOG IN WITH GOOGLE
             <span />
           </button>
