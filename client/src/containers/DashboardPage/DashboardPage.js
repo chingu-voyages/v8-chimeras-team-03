@@ -3,12 +3,15 @@ import "./DashboardPage.scss";
 import logo from "../../assets/Group 10@2x.png";
 import startButton from "../../assets/Group 44@2x.png";
 import stopButton from "../../assets/Group 47@2x.png";
-import { startTimer, stopTimer, timeParser } from "../../services/timers";
+import { timeParser } from "../../services/timers";
+import fire from "../../components/Firebase/firebase";
+
 
 class DashboardPage extends Component {
   state = {
     startTask: true, // check if task should start or end
-    id: 1, // mock for id
+    id: '3KzC8uKkihaY6Yg2bDtfqaVmCFu2', // mock for id
+    taskId: '',
     startTime: 0, // start time in miliseconds
     endTime: 0, // end time in milliseconds
     taskName: "",
@@ -34,12 +37,6 @@ class DashboardPage extends Component {
         startTime: Date.now(),
         intervalId: interval
       });
-      // send post reqest
-      startTimer({
-        startTime: this.state.startTime,
-        id: this.state.id,
-        taskName: this.state.taskName
-      });
     } else {
       // stop timer
       clearInterval(this.state.intervalId);
@@ -49,14 +46,26 @@ class DashboardPage extends Component {
         intervalId: "",
         timer: 0
       });
-      // send post request
-      stopTimer({
-        endTime: this.state.endTime,
-        id: this.state.id,
-        taskName: this.state.taskName
-      });
     }
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.startTime !== prevState.startTime) {
+      let push = fire.database().ref('tasks/' + this.state.id + '/').push({
+        taskName: this.state.taskName,
+        startTime: this.state.startTime
+      });
+      // eslint-disable-next-line
+      let taskId = this.setState({
+        taskId: push.key
+      });;
+    }
+    if (this.state.endTime !== prevState.endTime) {
+      fire.database().ref('tasks/' + this.state.id + '/' + this.state.taskId).update({
+        endTime: this.state.endTime
+      });
+    }
+  }
 
   onInputChange = e => {
     this.setState({
