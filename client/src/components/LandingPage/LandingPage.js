@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./LandingPage.scss";
+import { Link } from "react-router-dom";
 import video from "../../assets/video.mp4";
 
 export default class LandingPage extends Component {
@@ -13,7 +14,9 @@ export default class LandingPage extends Component {
         <p>Turn your team on to productivity with Toggl teh time tracker.</p>
         <video ref="video" src={video} />
         <button>
-          SIGN UP <span />
+          <Link to="/signup" style={{ textDecoration: 'none', color:'white' }}>
+            SIGN UP <span/>
+          </Link>
         </button>
       </div>
     );

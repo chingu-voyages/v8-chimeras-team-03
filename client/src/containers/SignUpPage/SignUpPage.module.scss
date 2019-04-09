@@ -1,5 +1,5 @@
 $grey: #e3e8eb;
-$green: #88cf8f;
+$beige: #feeddb;
 $red: #e1393f;
 
 .background-grey {
@@ -19,13 +19,14 @@ $red: #e1393f;
   }
 }
 
-.login {
+.signup {
   text-align: center;
-  background-color: $green;
+  background-color: $beige;
   overflow: auto;
   min-height: 100vh;
+  
   h1 {
-    color: white;
+    color: black;
     font-size: 30px;
     margin-top: 117px;
     @media screen and (min-width: 768px) {
@@ -40,7 +41,7 @@ $red: #e1393f;
     font-size: 14px;
     opacity: 0.8;
     margin-top: 20px;
-    color: white;
+    color: black;
     @media screen and (min-width: 1280px) {
       font-size: 20px;
     }
@@ -119,12 +120,12 @@ $red: #e1393f;
   @media screen and (min-width: 768px) {
     margin-top: 80px;
     width: 441px;
-    height: 447px;
+    height: 550px;
   }
   @media screen and (min-width: 1280px) {
     margin-top: 82px;
     width: 653px;
-    height: 706px;
+    height: 800px;
     padding: 50px 65px 0 65px;
   }
   label {
@@ -154,6 +155,17 @@ $red: #e1393f;
       font-size: 14px;
     }
   }
+  div{
+    display: inline;
+    input{
+      width: 30px;     
+    }
+    p{
+      display: inline;
+      text-decoration: none;
+    }
+  }
+  
   p {
     // forgot password
     font-size: 14px;
@@ -166,7 +178,7 @@ $red: #e1393f;
       margin-top: 16px;
     }
   }
-  .log-in-btn {
+  .sign-up-btn {
     cursor: pointer;
     background-color: $red;
     border: none;
@@ -204,7 +216,7 @@ $red: #e1393f;
       }
     }
   }
-  .log-in-google-btn {
+  .sign-up-google-btn {
     cursor: pointer;
     border: 1px solid black;
     outline: none;
@@ -240,28 +252,7 @@ $red: #e1393f;
       }
     }
   }
-  .or {
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    margin-top: 18px;
-    opacity: 0.5;
-    p {
-      text-decoration: none;
-      margin-top: 0;
-      margin-left: 4px;
-      margin-right: 4px;
-      @media screen and (min-width: 1280px) {
-        font-size: 20px;
-      }
-    }
-    .hr {
-      border: 1px solid black;
-      width: 100px;
-      height: 1px;
-      @media screen and (min-width: 1280px) {
-        width: 200px;
-      }
-    }
+  .sign-up-btn:disabled{
+    background-color: $grey;
   }
 }
