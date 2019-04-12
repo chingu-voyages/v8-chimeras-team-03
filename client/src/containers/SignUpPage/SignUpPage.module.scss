@@ -24,7 +24,7 @@ $red: #e1393f;
   background-color: $beige;
   overflow: auto;
   min-height: 100vh;
-  
+
   h1 {
     color: black;
     font-size: 30px;
@@ -155,17 +155,33 @@ $red: #e1393f;
       font-size: 14px;
     }
   }
-  div{
-    display: inline;
-    input{
-      width: 30px;     
+  div {
+    // display: inline;
+    // changed to display: flex
+    display: flex;
+    align-items: center;
+    input {
+      width: 30px;
+      // changed mb
+      @media screen and(min-width: 768px) {
+        margin-bottom: 7px;
+      }
     }
-    p{
+    p {
       display: inline;
       text-decoration: none;
+      // added margins
+      margin-left: 10px;
+      @media screen and(min-width: 768px) {
+        margin-left: 14px;
+      }
+      @media screen and(min-width: 1280px) {
+        margin-left: 32px;
+        font-size: 20px;
+      }
     }
   }
-  
+
   p {
     // forgot password
     font-size: 14px;
@@ -173,9 +189,9 @@ $red: #e1393f;
     font-weight: bold;
     color: black;
     opacity: 1;
-    margin-top: 34px;
+    margin-top: 0; // overwritten mt
     @media screen and (min-width: 768px) {
-      margin-top: 16px;
+      // margin-top: 16px;
     }
   }
   .sign-up-btn {
@@ -228,14 +244,23 @@ $red: #e1393f;
     text-align: center;
     background-color: white;
     margin-top: 18px;
+    ///// ////////////////////////
+    margin-bottom: 32px;
+    ///////////////////////////
     @media screen and (min-width: 768px) {
       width: 350px;
+      //////////////
+      margin-bottom: 50px;
+      /////////////
     }
     @media screen and (min-width: 1280px) {
       width: 518px;
       height: 49px;
       font-size: 20px;
       margin-top: 47px;
+      ////
+      margin-bottom: 61px;
+      ////
     }
     span {
       width: 0;
@@ -252,7 +277,7 @@ $red: #e1393f;
       }
     }
   }
-  .sign-up-btn:disabled{
+  .sign-up-btn:disabled {
     background-color: $grey;
   }
 }
