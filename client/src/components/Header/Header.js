@@ -27,7 +27,9 @@ export default function Header(props) {
             <Link to="#">Training</Link>
           </li>
           <li>
-            <Link to="/login">Log in</Link>
+            <Link to="/login" id="_log-in">
+              Log in
+            </Link>
           </li>
           <li>
             <Link to="/signup">Sign up</Link>

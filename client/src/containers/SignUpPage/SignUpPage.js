@@ -3,7 +3,7 @@ import "./SignUpPage.scss";
 
 class SignUpPage extends Component {
   render() {
-    return <div>SignUp Page</div>;
+    return <div className="x">SignUp Page</div>;
   }
 }
 

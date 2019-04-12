@@ -11,7 +11,7 @@ export default class LandingPage extends Component {
       <div className="landing-page" ref="landing">
         <h1>Where did time go?</h1>
         <p>Turn your team on to productivity with Toggl teh time tracker.</p>
-        <video ref="video" src={video} />
+        <video ref="video" src={video} type="video/mp4" />
         <button>
           SIGN UP <span />
         </button>
