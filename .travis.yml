@@ -1,3 +1,7 @@
 language: node_js
 node_js:
   - "stable"
+deploy:
+  provider: heroku
+  api_key: 1ef9fa3c-567c-48dc-ab3a-71c1b4f5df42
+  app: chimeras03
