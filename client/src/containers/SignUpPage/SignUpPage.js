@@ -53,7 +53,7 @@ class SignUpPage extends Component {
           <label htmlFor="password">SET A PASSWORD</label>
           <input type="password" id="password" onChange={this.handlePassword} value={this.state.password}/>
           <label htmlFor="password">CONFIRM PASSWORD</label>
-          <input type="password" id="confirmPassword" onChange={this.handleConfirmPassword} value={this.state.country}/>
+          <input type="password" id="confirmPassword" onChange={this.handleConfirmPassword} value={this.state.repeatedPassword}/>
           <div><input type="checkbox" onChange={this.handleCheckbox} id="checkbox" value={this.state.userAgreedToTerms} /> <p>Accept the terms</p></div>
           <button className={classes['sign-up-btn']} type="submit" disabled={!isEnabled}>
             SIGN UP FOR FREE <span />
