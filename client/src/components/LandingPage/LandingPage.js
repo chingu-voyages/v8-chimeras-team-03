@@ -11,7 +11,7 @@ export default class LandingPage extends Component {
     return (
       <div className="landing-page" ref="landing">
         <h1>Where did time go?</h1>
-        <p>Turn your team on to productivity with Toggl teh time tracker.</p>
+        <p>Turn your team on to productivity with Toggl the time tracker.</p>
         <video ref="video" src={video} />
         <button>
           <Link to="/signup" style={{ textDecoration: 'none', color:'white' }}>

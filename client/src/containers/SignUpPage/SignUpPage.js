@@ -6,7 +6,7 @@ class SignUpPage extends Component {
   state = {
     email: "",
     password: "",
-    country: "",
+    repeatedPassword: "",
     userAgreedToTerms : false
   }
 
@@ -16,26 +16,27 @@ class SignUpPage extends Component {
   handleEmail = (event) => {
     this.setState({ email: event.target.value });
   }
-  handleCountry = (event) => {
-    this.setState({ country: event.target.value });
-  }
   handlePassword = (event) => {
     this.setState({ password: event.target.value });
+  }
+  handleConfirmPassword = (event) => {
+    this.setState({ repeatedPassword: event.target.value });
   }
   handleSubmit = (event) => {
     if(!this.canBeSubmitted){
       event.preventDefault();
       return;
     }else{
-    const {email, password, country, userAgreedToTerms} = this.state;
-    alert(`Signed up with email: ${email} password: ${password} country: ${country} termsAgreed: ${userAgreedToTerms}`)
+    const {email, password, repeatedPassword, userAgreedToTerms} = this.state;
+    alert(`Signed up with email: ${email} password: ${password} repeatedPassword: ${repeatedPassword} termsAgreed: ${userAgreedToTerms}`)
     }
   }
   canBeSubmitted = () => {
-    const { email, password, country, userAgreedToTerms } = this.state;
+    const { email, password, repeatedPassword, userAgreedToTerms } = this.state;
     return (  email.length > 0 && 
               password.length > 0 && 
-              country.length > 0 && 
+              repeatedPassword.length > 0 &&
+              password === repeatedPassword && 
               userAgreedToTerms === true
           );
   }
@@ -51,8 +52,8 @@ class SignUpPage extends Component {
           <input type="email" id="email" onChange={this.handleEmail} value={this.state.email} />
           <label htmlFor="password">SET A PASSWORD</label>
           <input type="password" id="password" onChange={this.handlePassword} value={this.state.password}/>
-          <label htmlFor="country">COUNTRY</label>
-          <input type="country" id="country" onChange={this.handleCountry} value={this.state.country}/>
+          <label htmlFor="password">CONFIRM PASSWORD</label>
+          <input type="password" id="confirmPassword" onChange={this.handleConfirmPassword} value={this.state.country}/>
           <div><input type="checkbox" onChange={this.handleCheckbox} id="checkbox" value={this.state.userAgreedToTerms} /> <p>Accept the terms</p></div>
           <button className={classes['sign-up-btn']} type="submit" disabled={!isEnabled}>
             SIGN UP FOR FREE <span />
