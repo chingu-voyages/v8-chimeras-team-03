@@ -110,3 +110,4 @@ class DashboardPage extends Component {
     );
   }
 }
+export default DashboardPage;
