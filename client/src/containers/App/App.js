@@ -14,11 +14,6 @@ class App extends Component {
     dropDown: false,
     isUserLogged: true
   };
-  showDropDown = () => {
-    this.setState({
-      dropDown: true
-    });
-  };
   componentWillMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
@@ -33,6 +28,11 @@ class App extends Component {
       }
     })
   }
+  showDropDown = () => {
+    this.setState({
+      dropDown: true
+    });
+  };
   hideDropDown = () => {
     this.setState({
       dropDown: false
