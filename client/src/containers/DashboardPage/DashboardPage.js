@@ -102,7 +102,7 @@ class DashboardPage extends Component {
     const { onTimerClick, onInputChange } = this;
     const { hours, minutes, seconds } = timeParser(this.state.timer);
     if (this.state.redirect) {
-      return <Redirect from="/dashboard" to="/landingPage"/>
+      return <Redirect to="/"/>
     }
     return (
       <div className="dashboard">
