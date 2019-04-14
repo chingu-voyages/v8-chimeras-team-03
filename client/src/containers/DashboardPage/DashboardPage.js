@@ -4,7 +4,6 @@ import logo from "../../assets/Group 10@2x.png";
 import startButton from "../../assets/Group 44@2x.png";
 import stopButton from "../../assets/Group 47@2x.png";
 import { timeParser } from "../../services/timers";
-import { Redirect } from "react-router-dom"
 import firebase, { auth } from "../../components/Firebase/firebase";
 
 
@@ -29,12 +28,8 @@ class DashboardPage extends Component {
     }
   };
   handleLogOut = async event => {
-    event.preventDefault();
     try {
       await auth.signOut();
-      this.setState({
-        redirect: true
-      });
     } catch (error) {
       alert(error);
     }
@@ -101,9 +96,7 @@ class DashboardPage extends Component {
     const { startTask, taskName } = this.state;
     const { onTimerClick, onInputChange } = this;
     const { hours, minutes, seconds } = timeParser(this.state.timer);
-    if (this.state.redirect) {
-      return <Redirect to="/"/>
-    }
+    
     return (
       <div className="dashboard">
         <div className="menu">
