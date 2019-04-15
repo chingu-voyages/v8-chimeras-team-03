@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./LandingPage.scss";
-import { Link } from "react-router-dom";
 import video from "../../assets/video.mp4";
 
 export default class LandingPage extends Component {
