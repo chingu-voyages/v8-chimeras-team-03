@@ -20,3 +20,8 @@ it("checks if input if empty first time it renders", () => {
   );
   expect(wrapper.find("#password").val).toEqual(undefined);
 });
+
+it("renders without crashing", () => {
+  const wrapper = shallow(<LoginPage />);
+  expect(wrapper).toMatchSnapshot();
+});

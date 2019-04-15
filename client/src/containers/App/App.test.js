@@ -28,23 +28,23 @@ it("Checks if the state is changing", () => {
   expect(wrapper.state("isUserLogged")).toEqual(true);
 });
 
-it("check if sign up button navigates to signup page", () => {
-  const wrapper = mount(
-    <HashRouter>
-      <App />
-    </HashRouter>
-  );
+// it("check if sign up button navigates to signup page", () => {
+//   const wrapper = mount(
+//     <HashRouter>
+//       <App />
+//     </HashRouter>
+//   );
 
-  // go to login page
-  // press sign up button
-  // check current url
+//   // go to login page
+//   // press sign up button
+//   // check current url
 
-  const button = wrapper.find("#_log-in");
-  //expect(wrapper.find("#_log-in").length).toBe(1);
+//   const button = wrapper.find("#_log-in");
+//   //expect(wrapper.find("#_log-in").length).toBe(1);
 
-  expect(wrapper.find(LoginPage).props.match.params.id).toEqual(true);
-  button.at(1).simulate("click");
-  expect(wrapper.contains(LoginPage)).toEqual(true);
-  expect(wrapper.contains(LandingPage)).toEqual(true);
-  wrapper.unmount();
-});
+//   expect(wrapper.find(LoginPage).props.match.params.id).toEqual(true);
+//   button.at(1).simulate("click");
+//   expect(wrapper.contains(LoginPage)).toEqual(true);
+//   expect(wrapper.contains(LandingPage)).toEqual(true);
+//   wrapper.unmount();
+// });

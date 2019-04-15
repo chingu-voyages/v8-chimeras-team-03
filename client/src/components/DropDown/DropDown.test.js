@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
-import DashboardPage from "./DashboardPage";
+import DropDown from "./DropDown";
 
 it("should render without crashing", () => {
-  const wrapper = shallow(<DashboardPage />);
+  const wrapper = shallow(<DropDown />);
   expect(wrapper).toMatchSnapshot();
 });
