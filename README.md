@@ -5,11 +5,10 @@
  1. Run your terminal and clone this repository: `git clone https://github.com/chingu-voyages/v8-chimeras-team-03.git`
  2. Change directory: `cd v8-chimeras-team-03`
  3. Install all dependencies: `npm install`
- 4. Configure your local server:
-   - Go in the server directory: `cd server`
+ 4. Configure your .env file:
    - Copy example configuration file: `cp .env.example .env`
    - Modify the `.env` file to match your environment settings
- 5. Start client and server (from the main project directory): `npm start`
+ 5. Start: `npm start`
 
 # v8-chimeras-team-03
 
