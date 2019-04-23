@@ -7,19 +7,32 @@ import DashboardPage from "../DashboardPage/DashboardPage";
 import LoginPage from "../LoginPage/LoginPage";
 import Header from "../../components/Header/Header";
 import DropDown from "../../components/DropDown/DropDown";
+import { auth } from '../../components/Firebase/firebase'
 
 class App extends Component {
   state = {
     dropDown: false,
     isUserLogged: false
   };
-
+  componentWillMount() {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          isUserLogged: true
+        })
+      }
+      else {
+        this.setState({
+          isUserLogged: false
+        });
+      }
+    })
+  }
   showDropDown = () => {
     this.setState({
       dropDown: true
     });
   };
-
   hideDropDown = () => {
     this.setState({
       dropDown: false
