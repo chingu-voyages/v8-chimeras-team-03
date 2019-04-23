@@ -1,14 +1,51 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "./LoginPage.scss";
+import { auth, provider } from "../../components/Firebase/firebase";
 
 class LoginPage extends Component {
+  constructor() {
+    super();
+    this.handleLogIn = this.handleLogIn.bind(this);
+    this.handleGoogleLogIn = this.handleGoogleLogIn.bind(this);
+    this.state = {
+      redirect: false
+    }
+  }
+  handleLogIn = async event => {
+    event.preventDefault();
+    const { email, password } = event.target.elements;
+    console.log(email);
+    try {
+      await auth.signInWithEmailAndPassword(email.value, password.value);
+      this.setState({
+        redirect: true
+      });
+    } catch (error) {
+      alert(error);
+    }
+  }
+  handleGoogleLogIn = async event => {
+    event.preventDefault();
+    try {
+      await auth.signInWithPopup(provider);
+      this.setState({
+        redirect: true
+      });
+    } catch (error) {
+      alert(error);
+    }
+  }
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/dashboard"/>
+    }
     return (
       <div className="login">
         <h1>Get tracking</h1>
         <p>Log in to your Toggl account.</p>
-        <form className="form">
+        <form onSubmit={this.handleLogIn} className="form">
           <label htmlFor="email">EMAIL ADDRESS</label>
           <input type="email" id="email" />
           <label htmlFor="password">PASSWORD</label>
@@ -22,7 +59,7 @@ class LoginPage extends Component {
             <p>OR</p>
             <div className="hr" />
           </div>
-          <button className="log-in-google-btn">
+          <button onClick={this.handleGoogleLogIn} className="log-in-google-btn">
             LOG IN WITH GOOGLE
             <span />
           </button>
