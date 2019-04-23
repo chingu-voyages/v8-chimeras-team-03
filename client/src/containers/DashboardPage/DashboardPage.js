@@ -4,13 +4,17 @@ import logo from "../../assets/Group 10@2x.png";
 import startButton from "../../assets/Group 44@2x.png";
 import stopButton from "../../assets/Group 47@2x.png";
 import { timeParser } from "../../services/timers";
-import fire from "../../components/Firebase/firebase";
+import firebase, { auth } from "../../components/Firebase/firebase";
 
 
 class DashboardPage extends Component {
+  constructor(){
+    super();
+    this.handleLogOut = this.handleLogOut.bind(this);
+  }
   state = {
     startTask: true, // check if task should start or end
-    id: '3KzC8uKkihaY6Yg2bDtfqaVmCFu2', // mock for id
+    id: '', // mock for id
     taskId: '',
     startTime: 0, // start time in miliseconds
     endTime: 0, // end time in milliseconds
@@ -23,6 +27,13 @@ class DashboardPage extends Component {
       seconds: "00"
     }
   };
+  handleLogOut = async event => {
+    try {
+      await auth.signOut();
+    } catch (error) {
+      alert(error);
+    }
+  }
   onTimerClick = () => {
     if (this.state.startTask) {
       // start timer
@@ -48,10 +59,19 @@ class DashboardPage extends Component {
       });
     }
   };
-
+  componentWillMount() {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          user: user,
+          id: user.uid
+        });
+      }
+    })
+  }
   componentDidUpdate(prevProps, prevState) {
     if (this.state.startTime !== prevState.startTime) {
-      let push = fire.database().ref('tasks/' + this.state.id + '/').push({
+      let push = firebase.database().ref('tasks/' + this.state.id + '/').push({
         taskName: this.state.taskName,
         startTime: this.state.startTime
       });
@@ -61,7 +81,7 @@ class DashboardPage extends Component {
       });;
     }
     if (this.state.endTime !== prevState.endTime) {
-      fire.database().ref('tasks/' + this.state.id + '/' + this.state.taskId).update({
+      firebase.database().ref('tasks/' + this.state.id + '/' + this.state.taskId).update({
         endTime: this.state.endTime
       });
     }
@@ -76,11 +96,12 @@ class DashboardPage extends Component {
     const { startTask, taskName } = this.state;
     const { onTimerClick, onInputChange } = this;
     const { hours, minutes, seconds } = timeParser(this.state.timer);
+    
     return (
       <div className="dashboard">
         <div className="menu">
           <div className="logo">
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="logo" onClick={this.handleLogOut}/>
             <p>toggl clone</p>
           </div>
         </div>

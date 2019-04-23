@@ -1,15 +1,35 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
+import { auth } from "../../components/Firebase/firebase";
 import classes from "./SignUpPage.module.scss";
 
 class SignUpPage extends Component {
-  state = {
-    email: "",
-    password: "",
-    repeatedPassword: "",
-    userAgreedToTerms : false
+  constructor() {
+    super();
+    this.handleSignUp = this.handleSignUp.bind(this);
+    this.state = {
+      redirect: false,
+      email: "",
+      password: "",
+      repeatedPassword: "",
+      userAgreedToTerms : false
+    }
   }
-
+  handleSignUp = async event => {
+    if(!this.canBeSubmitted){
+      event.preventDefault();
+      return;
+    }
+    const { email, password } = this.state;
+    try {
+      await auth.createUserWithEmailAndPassword(email, password);
+      this.setState({
+        redirect: true
+      });
+    } catch (error) {
+      alert(error);
+    }
+  }
   handleCheckbox = () => {
     this.setState({userAgreedToTerms : !this.state.userAgreedToTerms});
   }
@@ -22,15 +42,6 @@ class SignUpPage extends Component {
   handleConfirmPassword = (event) => {
     this.setState({ repeatedPassword: event.target.value });
   }
-  handleSubmit = (event) => {
-    if(!this.canBeSubmitted){
-      event.preventDefault();
-      return;
-    }else{
-    const {email, password, repeatedPassword, userAgreedToTerms} = this.state;
-    alert(`Signed up with email: ${email} password: ${password} repeatedPassword: ${repeatedPassword} termsAgreed: ${userAgreedToTerms}`)
-    }
-  }
   canBeSubmitted = () => {
     const { email, password, repeatedPassword, userAgreedToTerms } = this.state;
     return (  email.length > 0 && 
@@ -40,14 +51,17 @@ class SignUpPage extends Component {
               userAgreedToTerms === true
           );
   }
-
   render() {
     const isEnabled = this.canBeSubmitted();
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/"/>
+    }
     return (
       <div className={classes.signup}>
         <h1>Let's get started</h1>
         <p>Kickstart your productivity with toggl clone</p>
-        <form className={classes.form} onSubmit={this.handleSubmit}>
+        <form className={classes.form} onSubmit={this.handleSignUp}>
           <label htmlFor="email">EMAIL ADDRESS</label>
           <input type="email" id="email" onChange={this.handleEmail} value={this.state.email} />
           <label htmlFor="password">SET A PASSWORD</label>
@@ -73,5 +87,4 @@ class SignUpPage extends Component {
     )
   }
 }
-
 export default SignUpPage;
