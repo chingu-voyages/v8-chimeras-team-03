@@ -1,0 +1,14 @@
+.hamburger-menu {
+  display: flex;
+  flex-direction: column;
+  margin-right: 36px;
+  cursor: pointer;
+  div {
+    border: 2px solid black;
+    width: 40px;
+    margin-top: 8px;
+  }
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
