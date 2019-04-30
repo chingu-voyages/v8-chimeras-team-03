@@ -30,6 +30,40 @@
           margin-left: 6px;
         }
       }
+      margin-bottom: auto;
+    }
+    .logout-btn {
+      background-color: transparent;
+      border-color: transparent;
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      @media screen and (min-width: 1280px) {
+        margin-bottom: 12px;
+      }
+      img { 
+        width: 25px;
+        height: 25px;
+      }
+      img:hover {
+        width: 30px;
+        height: 30px;
+      }
+      img:active {
+        width: 25px;
+        height: 25px;
+      }
+      p {
+        display: none;
+        @media screen and (min-width: 1280px) {
+          display: inline-block;
+          color: white;
+          margin-left: 6px;
+        }
+      }
     }
   }
   .main {
