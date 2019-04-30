@@ -69,3 +69,11 @@
     }
   }
 }
+        .task {
+          display: flex;
+          width: 300px;
+          justify-content: space-between;
+        }
+        ul {
+          list-style: none;
+        }

@@ -24,8 +24,9 @@ class DashboardPage extends Component {
     taskTime: {
       hours: "00",
       minutes: "00",
-      seconds: "00"
-    }
+      seconds: "00",
+    },
+    listofTasks: {} // object that holds all task data
   };
   handleLogOut = async event => {
     try {
@@ -62,13 +63,27 @@ class DashboardPage extends Component {
   componentWillMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
-        this.setState({
-          user: user,
-          id: user.uid
+        this.setState(()=>{
+          return {
+            user: user,
+            id: user.uid}
         });
-      }
-    })
+        this.tasks= firebase.database().ref("tasks/"+this.state.id)
+        // console.log(this.state.user)
+        this.tasks.on("value", snapshot=> {
+        var tasks = snapshot.val()
+                this.setState(()=>{
+                return {
+                       listofTasks: tasks
+                       }
+                })
+        }, function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
+          }
+        })
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state.startTime !== prevState.startTime) {
       let push = firebase.database().ref('tasks/' + this.state.id + '/').push({
@@ -93,10 +108,15 @@ class DashboardPage extends Component {
     });
   };
   render() {
-    const { startTask, taskName } = this.state;
+    const { startTask, taskName, listofTasks } = this.state;
     const { onTimerClick, onInputChange } = this;
     const { hours, minutes, seconds } = timeParser(this.state.timer);
-    
+    const tasks = [];
+    if(Object.keys(listofTasks).length>0){
+      var x;
+      for(x in listofTasks) {
+        tasks.push([listofTasks[x].taskName,listofTasks[x].startTime, listofTasks[x].endTime])
+      }}
     return (
       <div className="dashboard">
         <div className="menu">
@@ -126,6 +146,21 @@ class DashboardPage extends Component {
               onClick={onTimerClick}
             />
           </form>
+        </div>
+        <div>
+          <ul>
+            {/* {tasks.length>0?tasks:""} */}
+            {tasks.length>0?tasks.map((task,i)=><li key={i}>
+            <div className="task">
+              <div className="task-name">
+            {task[0]||"----"}</div>
+                <div className="task-duration">
+            {console.log(timeParser(task[2]-task[1]))}
+            {timeParser(task[2]-task[1]).hours}:{timeParser(task[2]-task[1]).minutes }:{timeParser(task[2]-task[1]).seconds }
+                </div>
+            </div>
+            </li>):""}
+          </ul>
         </div>
       </div>
     );

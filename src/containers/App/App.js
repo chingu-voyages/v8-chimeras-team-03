@@ -38,6 +38,7 @@ class App extends Component {
       dropDown: false
     });
   };
+  
   render() {
     const { showDropDown, hideDropDown } = this;
     const { isUserLogged } = this.state;
