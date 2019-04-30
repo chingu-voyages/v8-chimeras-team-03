@@ -118,51 +118,59 @@ class DashboardPage extends Component {
         tasks.push([listofTasks[x].taskName,listofTasks[x].startTime, listofTasks[x].endTime])
       }}
     return (
-      <div className="dashboard">
-        <div className="menu">
-          <div className="logo">
-            <img src={logo} alt="logo" onClick={this.handleLogOut}/>
-            <p>toggl clone</p>
+        <div className="dashboard">
+          <div className="menu">
+            <div className="logo">
+              <img src={logo} alt="logo" onClick={this.handleLogOut} />
+              <p>toggl clone</p>
+            </div>
+          </div>
+          <div className="main">
+            <form
+              onSubmit={e => {
+                e.preventDefault();
+              }}
+            >
+              <input
+                type="text"
+                placeholder="What are you working on?"
+                value={taskName}
+                onChange={onInputChange}
+              />
+              <div className="timer">
+                <span>{hours}</span>:<span>{minutes}</span>:
+                <span>{seconds}</span>
+              </div>
+              <img
+                src={startTask ? startButton : stopButton}
+                alt="button"
+                onClick={onTimerClick}
+              />
+            </form>
+            <div className="taskList">
+              <ul>
+                {/* {tasks.length>0?tasks:""} */}
+                {tasks.length > 0
+                  ? tasks.map((task, i) => (
+                      <li key={i}>
+                        <div className="task">
+                          <div className="task-name">
+                            {task[0] || "----"}
+                          </div>
+                          <div className="task-duration">
+                            {console.log(timeParser(task[2] - task[1]))}
+                            {timeParser(task[2] - task[1]).hours}:
+                            {timeParser(task[2] - task[1]).minutes}:
+                            {timeParser(task[2] - task[1]).seconds}
+                          </div>
+                        </div>
+                      </li>
+                    ))
+                  : ""}
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="main">
-          <form
-            onSubmit={e => {
-              e.preventDefault();
-            }}
-          >
-            <input
-              type="text"
-              placeholder="What are you working on?"
-              value={taskName}
-              onChange={onInputChange}
-            />
-            <div className="timer">
-              <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
-            </div>
-            <img
-              src={startTask ? startButton : stopButton}
-              alt="button"
-              onClick={onTimerClick}
-            />
-          </form>
-        </div>
-        <div>
-          <ul>
-            {/* {tasks.length>0?tasks:""} */}
-            {tasks.length>0?tasks.map((task,i)=><li key={i}>
-            <div className="task">
-              <div className="task-name">
-            {task[0]||"----"}</div>
-                <div className="task-duration">
-            {console.log(timeParser(task[2]-task[1]))}
-            {timeParser(task[2]-task[1]).hours}:{timeParser(task[2]-task[1]).minutes }:{timeParser(task[2]-task[1]).seconds }
-                </div>
-            </div>
-            </li>):""}
-          </ul>
-        </div>
-      </div>
     );
   }
 }
