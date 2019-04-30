@@ -12,7 +12,7 @@ import { auth } from '../../components/Firebase/firebase'
 class App extends Component {
   state = {
     dropDown: false,
-    isUserLogged: true
+    isUserLogged: false
   };
   componentWillMount() {
     auth.onAuthStateChanged(user => {
