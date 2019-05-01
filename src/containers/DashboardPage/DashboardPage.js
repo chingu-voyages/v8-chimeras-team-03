@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./DashboardPage.scss";
 import logo from "../../assets/Group 10@2x.png";
-import logout from "../../assets/Logout  10@2x.png"
+import logout from "../../assets/Logout  10@2x.png";
 import startButton from "../../assets/Group 44@2x.png";
 import stopButton from "../../assets/Group 47@2x.png";
 import { timeParser } from "../../services/timers";
@@ -137,9 +137,13 @@ class DashboardPage extends Component {
       <div className="dashboard">
         <div className="menu">
           <div className="logo">
-            <img src={logo} alt="logo" onClick={this.handleLogOut} />
+            <img src={logo} alt="logo" />
             <p>toggl clone</p>
           </div>
+          <button className="logout-btn">
+            <img src={logout} alt="logout button" onClick={this.handleLogOut} />
+            <p>Log Out</p>
+          </button>
         </div>
         <div className="main">
           <form
