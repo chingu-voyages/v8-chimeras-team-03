@@ -156,7 +156,7 @@ class DashboardPage extends Component {
             {task[0]||"----"}</div>
                 <div className="task-duration">
             {console.log(timeParser(task[2]-task[1]))}
-            {timeParser(task[2]-task[1]).hours}:{timeParser(task[2]-task[1]).minutes }:{timeParser(task[2]-task[1]).seconds }
+            {timeParser((task[2]-task[1])/1000).hours}:{timeParser((task[2]-task[1])/1000).minutes }:{timeParser((task[2]-task[1])/1000).seconds }
                 </div>
             </div>
             </li>):""}
