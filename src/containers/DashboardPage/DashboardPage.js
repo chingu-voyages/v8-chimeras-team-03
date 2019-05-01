@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./DashboardPage.scss";
 import logo from "../../assets/Group 10@2x.png";
+import logout from "../../assets/Logout  10@2x.png"
 import startButton from "../../assets/Group 44@2x.png";
 import stopButton from "../../assets/Group 47@2x.png";
 import { timeParser } from "../../services/timers";
