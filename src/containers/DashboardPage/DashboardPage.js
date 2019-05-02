@@ -120,22 +120,24 @@ class DashboardPage extends Component {
   };
 
   removeTask = taskId => {
-    const url = "tasks/" + this.state.id + "/" + taskId[0];
-    console.log(url);
-    const deleteTask = firebase.database().ref(url);
-    deleteTask.on(
-      "value",
-      snapshot => {
-        var tasks = snapshot.val();
-      },
-      function(errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      }
-    );
-    deleteTask
-      .remove()
-      .then(data => console.log(data, "removed"))
-      .catch(err => console.log(err));
+    taskId.forEach(task => {
+      const url = "tasks/" + this.state.id + "/" + task;
+      console.log(url);
+      const deleteTask = firebase.database().ref(url);
+      deleteTask.on(
+        "value",
+        snapshot => {
+          var tasks = snapshot.val();
+        },
+        function(errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        }
+      );
+      deleteTask
+        .remove()
+        .then(data => console.log(data, "removed"))
+        .catch(err => console.log(err));
+    });
   };
   render() {
     const { startTask, taskName, listofTasks } = this.state;
