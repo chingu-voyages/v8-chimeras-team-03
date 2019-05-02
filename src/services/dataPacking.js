@@ -29,7 +29,8 @@ export function dataPacking(listofTasks) {
       if (index !== -1) {
         // there is already a task with the same name
         tasks[index] = {
-          taksName: tasks[index].taskName,
+          taskId: [...tasks[index].taskId, x],
+          taskName: tasks[index].taskName,
           singleTask: false,
           times: [
             ...tasks[index].times,
@@ -45,7 +46,9 @@ export function dataPacking(listofTasks) {
         };
       } else {
         // there is no task with the same name
+
         tasks.push({
+          taskId: [x],
           taskName: listofTasks[x].taskName,
           singleTask: true,
           times: [

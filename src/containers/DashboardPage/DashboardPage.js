@@ -65,27 +65,26 @@ class DashboardPage extends Component {
     auth.onAuthStateChanged(user => {
       if (user) {
         this.setState(() => {
+          this.tasks = firebase.database().ref("tasks/" + user.uid);
+          this.tasks.on(
+            "value",
+            snapshot => {
+              var tasks = snapshot.val();
+              this.setState(() => {
+                return {
+                  listofTasks: tasks
+                };
+              });
+            },
+            function(errorObject) {
+              console.log("The read failed: " + errorObject.code);
+            }
+          );
           return {
             user: user,
             id: user.uid
           };
         });
-        this.tasks = firebase.database().ref("tasks/" + this.state.id);
-        // console.log(this.state.user)
-        this.tasks.on(
-          "value",
-          snapshot => {
-            var tasks = snapshot.val();
-            this.setState(() => {
-              return {
-                listofTasks: tasks
-              };
-            });
-          },
-          function(errorObject) {
-            console.log("The read failed: " + errorObject.code);
-          }
-        );
       }
     });
   }
@@ -119,12 +118,32 @@ class DashboardPage extends Component {
       taskName: e.target.value
     });
   };
+
+  removeTask = taskId => {
+    const url = "tasks/" + this.state.id + "/" + taskId[0];
+    console.log(url);
+    const deleteTask = firebase.database().ref(url);
+    deleteTask.on(
+      "value",
+      snapshot => {
+        var tasks = snapshot.val();
+      },
+      function(errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      }
+    );
+    deleteTask
+      .remove()
+      .then(data => console.log(data, "removed"))
+      .catch(err => console.log(err));
+  };
   render() {
     const { startTask, taskName, listofTasks } = this.state;
     const { onTimerClick, onInputChange } = this;
     const { hours, minutes, seconds } = timeParser(this.state.timer);
 
     const tasks = dataPacking(listofTasks);
+    console.log(listofTasks);
 
     return (
       <div className="dashboard">
@@ -161,23 +180,27 @@ class DashboardPage extends Component {
           </form>
           <div className="taskList">
             <ul>
-              {/* {tasks.length > 0 ? tasks : ""} */}
               {tasks.length > 0
-                ? tasks.map((task, i) => (
-                    <li key={i}>
-                      <div className="task">
-                        <div className="task-name">
-                          {task.taskName || " "}{" "}
-                          {task.times.length > 1 ? task.times.length : ""}
+                ? tasks.map((task, i) => {
+                    return (
+                      <li key={i}>
+                        <div className="task">
+                          <div className="task-name">
+                            {task.taskName} {task.times.length}
+                          </div>
+                          <div className="task-duration">
+                            {timeParser(task.sumTimDif / 1000).hours}:
+                            {timeParser(task.sumTimDif / 1000).minutes}:
+                            {timeParser(task.sumTimDif / 1000).seconds}
+                          </div>
+
+                          <span onClick={() => this.removeTask(task.taskId)}>
+                            X
+                          </span>
                         </div>
-                        <div className="task-duration">
-                          {timeParser(task.sumTimDif / 1000).hours}:
-                          {timeParser(task.sumTimDif / 1000).minutes}:
-                          {timeParser(task.sumTimDif / 1000).seconds}
-                        </div>
-                      </div>
-                    </li>
-                  ))
+                      </li>
+                    );
+                  })
                 : ""}
             </ul>
           </div>
