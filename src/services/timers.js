@@ -22,3 +22,39 @@ export function timeParser(time) {
     seconds
   };
 }
+
+export function onTimerClick() {
+  if (this.state.startTask) {
+    // start timer
+    const interval = setInterval(() => {
+      this.setState(prevState => ({
+        timer: prevState.timer + 1
+      }));
+    }, 1000);
+
+    this.setState({
+      startTask: false,
+      startTime: Date.now(),
+      intervalId: interval
+    });
+  } else {
+    // stop timer
+    clearInterval(this.state.intervalId);
+    this.setState({
+      startTask: true,
+      endTime: Date.now(),
+      intervalId: "",
+      timer: 0
+    });
+  }
+}
+
+export function removeNaN(...data) {
+  let finalString = "";
+  if (isNaN(data[0])) {
+    finalString = "Pending";
+  } else {
+    finalString = `${data[0]}:${data[1]}:${data[2]}`;
+  }
+  return finalString;
+}
