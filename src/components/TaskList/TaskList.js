@@ -38,9 +38,9 @@ export default function TaskList(props) {
           </div>
           <div className="task-duration">
             {removeNaN(
-              timeParser(task.sumTimDif / 1000).hours,
-              timeParser(task.sumTimDif / 1000).minutes,
-              timeParser(task.sumTimDif / 1000).seconds
+              timeParser(task.sumTimeDif / 1000).hours,
+              timeParser(task.sumTimeDif / 1000).minutes,
+              timeParser(task.sumTimeDif / 1000).seconds
             )}
           </div>
 

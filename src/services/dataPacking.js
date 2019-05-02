@@ -23,6 +23,7 @@ export function dataPacking(listofTasks) {
   if (Object.keys(listofTasks).length > 0) {
     var x;
     for (x in listofTasks) {
+      // eslint-disable-next-line no-loop-func
       const index = tasks.findIndex(element => {
         return element.taskName === listofTasks[x].taskName;
       });
@@ -40,14 +41,12 @@ export function dataPacking(listofTasks) {
               timeDif: listofTasks[x].endTime - listofTasks[x].startTime
             }
           ],
-          sumTimDif: tasks[index].times.reduce((accumulator, currentValue) => {
-            return accumulator + currentValue.timeDif;
-          }, 0)
+          sumTimeDif: (listofTasks[x].endTime - listofTasks[x].startTime) + tasks[index].sumTimeDif,
         };
       } else {
         // there is no task with the same name
 
-        tasks.push({
+        tasks.unshift({
           taskId: [x],
           taskName: listofTasks[x].taskName,
           singleTask: true,
@@ -59,8 +58,8 @@ export function dataPacking(listofTasks) {
             }
           ]
         });
-        tasks[tasks.length - 1].sumTimDif =
-          tasks[tasks.length - 1].times[0].timeDif;
+        tasks[0].sumTimeDif =
+          tasks[0].times[0].timeDif;
       }
     }
   }
