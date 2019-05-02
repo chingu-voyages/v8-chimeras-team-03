@@ -45,7 +45,7 @@
       @media screen and (min-width: 1280px) {
         margin-bottom: 12px;
       }
-      img { 
+      img {
         width: 25px;
         height: 25px;
       }
@@ -126,6 +126,8 @@
           .task-name {
           }
           .task-duration {
+            margin-left: 50%;
+            position: absolute;
           }
         }
       }

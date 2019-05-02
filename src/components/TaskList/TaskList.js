@@ -1,6 +1,7 @@
 import React from "react";
 import SubList from "../TaskSubList/TaskSubList";
-import { timeParser } from "../../services/timers";
+import { timeParser, removeNaN } from "../../services/timers";
+import "./TaskList.scss";
 
 export default function TaskList(props) {
   const { task, removeTask } = props;
@@ -8,28 +9,47 @@ export default function TaskList(props) {
   return (
     <div>
       <li
+        style={{ cursor: "pointer" }}
         onClick={e => {
-          console.log(e.currentTarget.parentElement);
           if (
-            e.currentTarget.parentElement.childNodes[1].style.display === "none"
+            e.currentTarget.parentElement.childNodes[1].childNodes.length > 1
           ) {
-            e.currentTarget.parentElement.childNodes[1].style.display = "block";
-          } else {
-            e.currentTarget.parentElement.childNodes[1].style.display = "none";
+            if (
+              e.currentTarget.parentElement.childNodes[1].style.display ===
+              "none"
+            ) {
+              e.currentTarget.parentElement.childNodes[1].style.display =
+                "block";
+            } else {
+              e.currentTarget.parentElement.childNodes[1].style.display =
+                "none";
+            }
           }
         }}
       >
         <div className="task">
           <div className="task-name">
-            {task.taskName} {task.times.length}
+            {task.taskName}{" "}
+            {task.times.length > 1 ? (
+              <span className="num-of-subtasks">{task.times.length}</span>
+            ) : (
+              ""
+            )}
           </div>
           <div className="task-duration">
-            {timeParser(task.sumTimDif / 1000).hours}:
-            {timeParser(task.sumTimDif / 1000).minutes}:
-            {timeParser(task.sumTimDif / 1000).seconds}
+            {removeNaN(
+              timeParser(task.sumTimDif / 1000).hours,
+              timeParser(task.sumTimDif / 1000).minutes,
+              timeParser(task.sumTimDif / 1000).seconds
+            )}
           </div>
 
-          <span onClick={() => removeTask(task.taskId)}>X</span>
+          <span
+            style={{ color: "red" }}
+            onClick={() => removeTask(task.taskId)}
+          >
+            X
+          </span>
         </div>
       </li>
       {task.singleTask ? (
@@ -37,7 +57,6 @@ export default function TaskList(props) {
       ) : (
         <div style={{ display: "none" }}>
           {task.times.map((subTask, i) => {
-            console.log(subTask);
             return (
               <SubList
                 key={i}

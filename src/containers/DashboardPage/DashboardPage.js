@@ -4,15 +4,18 @@ import logo from "../../assets/Group 10@2x.png";
 import logout from "../../assets/Logout  10@2x.png";
 import startButton from "../../assets/Group 44@2x.png";
 import stopButton from "../../assets/Group 47@2x.png";
-import { timeParser } from "../../services/timers";
+import { timeParser, onTimerClick } from "../../services/timers";
 import firebase, { auth } from "../../components/Firebase/firebase";
 import { dataPacking } from "../../services/dataPacking";
 import TaskList from "../../components/TaskList/TaskList";
+import { removeTask } from "../../services/removeTask";
 
 class DashboardPage extends Component {
   constructor() {
     super();
     this.handleLogOut = this.handleLogOut.bind(this);
+    this.onTimerClick = onTimerClick.bind(this);
+    this.removeTask = removeTask.bind(this);
   }
   state = {
     startTask: true, // check if task should start or end
@@ -37,31 +40,7 @@ class DashboardPage extends Component {
       alert(error);
     }
   };
-  onTimerClick = () => {
-    if (this.state.startTask) {
-      // start timer
-      const interval = setInterval(() => {
-        this.setState(prevState => ({
-          timer: prevState.timer + 1
-        }));
-      }, 1000);
 
-      this.setState({
-        startTask: false,
-        startTime: Date.now(),
-        intervalId: interval
-      });
-    } else {
-      // stop timer
-      clearInterval(this.state.intervalId);
-      this.setState({
-        startTask: true,
-        endTime: Date.now(),
-        intervalId: "",
-        timer: 0
-      });
-    }
-  };
   componentWillMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
@@ -120,26 +99,6 @@ class DashboardPage extends Component {
     });
   };
 
-  removeTask = taskId => {
-    taskId.forEach(task => {
-      const url = "tasks/" + this.state.id + "/" + task;
-
-      const deleteTask = firebase.database().ref(url);
-      deleteTask.on(
-        "value",
-        snapshot => {
-          var tasks = snapshot.val();
-        },
-        function(errorObject) {
-          console.log("The read failed: " + errorObject.code);
-        }
-      );
-      deleteTask
-        .remove()
-        .then(data => console.log(data, "removed"))
-        .catch(err => console.log(err));
-    });
-  };
   render() {
     const { startTask, taskName, listofTasks } = this.state;
     const { onTimerClick, onInputChange } = this;
@@ -184,7 +143,6 @@ class DashboardPage extends Component {
             <ul>
               {tasks.length > 0
                 ? tasks.map((task, i) => {
-                    // console.log(task);
                     return (
                       <TaskList
                         key={i}
