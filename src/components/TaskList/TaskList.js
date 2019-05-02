@@ -6,8 +6,19 @@ export default function TaskList(props) {
   const { task, removeTask } = props;
 
   return (
-    <div onClick={e => console.log(e.currentTarget.childNodes[0].className)}>
-      <li>
+    <div>
+      <li
+        onClick={e => {
+          console.log(e.currentTarget.parentElement);
+          if (
+            e.currentTarget.parentElement.childNodes[1].style.display === "none"
+          ) {
+            e.currentTarget.parentElement.childNodes[1].style.display = "block";
+          } else {
+            e.currentTarget.parentElement.childNodes[1].style.display = "none";
+          }
+        }}
+      >
         <div className="task">
           <div className="task-name">
             {task.taskName} {task.times.length}
@@ -24,7 +35,7 @@ export default function TaskList(props) {
       {task.singleTask ? (
         ""
       ) : (
-        <div>
+        <div style={{ display: "none" }}>
           {task.times.map((subTask, i) => {
             console.log(subTask);
             return (
