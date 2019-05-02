@@ -69,7 +69,7 @@ class DashboardPage extends Component {
           this.tasks.on(
             "value",
             snapshot => {
-              var tasks = snapshot.val();
+              var tasks = snapshot.val() || {};
               this.setState(() => {
                 return {
                   listofTasks: tasks
@@ -143,7 +143,6 @@ class DashboardPage extends Component {
     const { hours, minutes, seconds } = timeParser(this.state.timer);
 
     const tasks = dataPacking(listofTasks);
-    console.log(listofTasks);
 
     return (
       <div className="dashboard">
