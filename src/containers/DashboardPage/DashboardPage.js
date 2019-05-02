@@ -7,6 +7,7 @@ import stopButton from "../../assets/Group 47@2x.png";
 import { timeParser } from "../../services/timers";
 import firebase, { auth } from "../../components/Firebase/firebase";
 import { dataPacking } from "../../services/dataPacking";
+import TaskList from "../../components/TaskList/TaskList";
 
 class DashboardPage extends Component {
   constructor() {
@@ -122,7 +123,7 @@ class DashboardPage extends Component {
   removeTask = taskId => {
     taskId.forEach(task => {
       const url = "tasks/" + this.state.id + "/" + task;
-      console.log(url);
+
       const deleteTask = firebase.database().ref(url);
       deleteTask.on(
         "value",
@@ -183,23 +184,13 @@ class DashboardPage extends Component {
             <ul>
               {tasks.length > 0
                 ? tasks.map((task, i) => {
+                    // console.log(task);
                     return (
-                      <li key={i}>
-                        <div className="task">
-                          <div className="task-name">
-                            {task.taskName} {task.times.length}
-                          </div>
-                          <div className="task-duration">
-                            {timeParser(task.sumTimDif / 1000).hours}:
-                            {timeParser(task.sumTimDif / 1000).minutes}:
-                            {timeParser(task.sumTimDif / 1000).seconds}
-                          </div>
-
-                          <span onClick={() => this.removeTask(task.taskId)}>
-                            X
-                          </span>
-                        </div>
-                      </li>
+                      <TaskList
+                        key={i}
+                        task={task}
+                        removeTask={this.removeTask}
+                      />
                     );
                   })
                 : ""}
