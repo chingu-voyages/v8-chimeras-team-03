@@ -6,7 +6,7 @@ export default function SubList(props) {
   return (
     <li>
       <div className="task">
-        {" - "}
+        {"- " + props.task.taskName}
         <div className="task-duration">
           {removeNaN(
             timeParser(props.subTask.timeDif / 1000).hours,
