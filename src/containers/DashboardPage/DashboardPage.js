@@ -9,7 +9,7 @@ import firebase, { auth } from "../../components/Firebase/firebase";
 import { dataPacking } from "../../services/dataPacking";
 import TaskList from "../../components/TaskList/TaskList";
 import { removeTask } from "../../services/removeTask";
-
+import { Helmet } from "react-helmet";
 class DashboardPage extends Component {
   constructor() {
     super();
@@ -100,7 +100,7 @@ class DashboardPage extends Component {
   };
 
   render() {
-    const { startTask, taskName, listofTasks } = this.state;
+    const { startTask, taskName, listofTasks, timer } = this.state;
     const { onTimerClick, onInputChange } = this;
     const { hours, minutes, seconds } = timeParser(this.state.timer);
 
@@ -108,6 +108,17 @@ class DashboardPage extends Component {
 
     return (
       <div className="dashboard">
+        <Helmet>
+          <meta charSet="utf-8" />
+          {timer !== 0 ? (
+            <title>
+              {hours}:{minutes}:{seconds}
+            </title>
+          ) : (
+            <title>Toggl clone</title>
+          )}
+          <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
         <div className="menu">
           <div className="logo">
             <img src={logo} alt="logo" />
