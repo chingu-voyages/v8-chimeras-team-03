@@ -4,18 +4,18 @@ import "./LoginPage.scss";
 import { auth, provider } from "../../components/Firebase/firebase";
 
 class LoginPage extends Component {
-  constructor() {
-    super();
-    this.handleLogIn = this.handleLogIn.bind(this);
-    this.handleGoogleLogIn = this.handleGoogleLogIn.bind(this);
-    this.state = {
-      redirect: false
-    }
-  }
+  state = {
+    redirect: false,
+    email: false,
+    password: false
+  };
+
   handleLogIn = async event => {
-    event.preventDefault();
+    if (!this.canBeSubmitted) {
+      event.preventDefault();
+      return;
+    }
     const { email, password } = event.target.elements;
-    console.log(email);
     try {
       await auth.signInWithEmailAndPassword(email.value, password.value);
       this.setState({
@@ -24,7 +24,7 @@ class LoginPage extends Component {
     } catch (error) {
       alert(error);
     }
-  }
+  };
   handleGoogleLogIn = async event => {
     event.preventDefault();
     try {
@@ -35,11 +35,27 @@ class LoginPage extends Component {
     } catch (error) {
       alert(error);
     }
-  }
+  };
+  handleEmail = event => {
+    event.target.value
+      ? this.setState({ email: true })
+      : this.setState({ email: false });
+  };
+  handlePassword = event => {
+    event.target.value
+      ? this.setState({ password: true })
+      : this.setState({ password: false });
+  };
+  canBeSubmitted = () => {
+    const { email, password } = this.state;
+    return email && password;
+  };
+
   render() {
     const { redirect } = this.state;
+    const isEnabled = this.canBeSubmitted();
     if (redirect) {
-      return <Redirect to="/dashboard"/>
+      return <Redirect to="/dashboard" />;
     }
     return (
       <div className="login">
@@ -47,11 +63,15 @@ class LoginPage extends Component {
         <p>Log in to your Toggl account.</p>
         <form onSubmit={this.handleLogIn} className="form">
           <label htmlFor="email">EMAIL ADDRESS</label>
-          <input type="email" id="email" />
+          <input type="email" id="email" onChange={this.handleEmail} />
           <label htmlFor="password">PASSWORD</label>
-          <input type="password" id="password" />
+          <input
+            type="password"
+            id="password"
+            onChange={this.handlePassword}
+          />
           <p>Forgot password?</p>
-          <button className="log-in-btn">
+          <button className="log-in-btn" disabled={!isEnabled}>
             LOG IN <span />
           </button>
           <div className="or">
@@ -59,7 +79,10 @@ class LoginPage extends Component {
             <p>OR</p>
             <div className="hr" />
           </div>
-          <button onClick={this.handleGoogleLogIn} className="log-in-google-btn">
+          <button
+            onClick={this.handleGoogleLogIn}
+            className="log-in-google-btn"
+          >
             LOG IN WITH GOOGLE
             <span />
           </button>
