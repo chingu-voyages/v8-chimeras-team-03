@@ -7,26 +7,31 @@ import DashboardPage from "../DashboardPage/DashboardPage";
 import LoginPage from "../LoginPage/LoginPage";
 import Header from "../../components/Header/Header";
 import DropDown from "../../components/DropDown/DropDown";
-import { auth } from '../../components/Firebase/firebase'
+import { auth } from "../../components/Firebase/firebase";
 
 class App extends Component {
   state = {
     dropDown: false,
-    isUserLogged: false
+    isUserLogged:
+      localStorage.getItem("isLogged") !== null
+        ? JSON.parse(localStorage.getItem("isLogged"))
+        : false
   };
+
   componentWillMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
-        this.setState({
-          isUserLogged: true
-        })
-      }
-      else {
+        localStorage.setItem("isLogged", true);
+        this.setState(() => {
+          return { isUserLogged: true };
+        });
+      } else {
+        localStorage.setItem("isLogged", true);
         this.setState({
           isUserLogged: false
         });
       }
-    })
+    });
   }
   showDropDown = () => {
     this.setState({
@@ -38,7 +43,7 @@ class App extends Component {
       dropDown: false
     });
   };
-  
+
   render() {
     const { showDropDown, hideDropDown } = this;
     const { isUserLogged } = this.state;

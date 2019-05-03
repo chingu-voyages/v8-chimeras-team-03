@@ -19,11 +19,15 @@ export function dataPacking(listofTasks) {
   //   sumTimeDifference: timeDif, // sums all time differences
   //
   // }
+
+  const days = [];
   const tasks = [];
   if (Object.keys(listofTasks).length > 0) {
     var x;
     for (x in listofTasks) {
       // eslint-disable-next-line no-loop-func
+      // console.log(new Date(listofTasks[x].endTime).toLocaleDateString());
+
       const index = tasks.findIndex(element => {
         return element.taskName === listofTasks[x].taskName;
       });
@@ -41,7 +45,10 @@ export function dataPacking(listofTasks) {
               timeDif: listofTasks[x].endTime - listofTasks[x].startTime
             }
           ],
-          sumTimeDif: (listofTasks[x].endTime - listofTasks[x].startTime) + tasks[index].sumTimeDif,
+          sumTimeDif:
+            listofTasks[x].endTime -
+            listofTasks[x].startTime +
+            tasks[index].sumTimeDif
         };
       } else {
         // there is no task with the same name
@@ -58,8 +65,7 @@ export function dataPacking(listofTasks) {
             }
           ]
         });
-        tasks[0].sumTimeDif =
-          tasks[0].times[0].timeDif;
+        tasks[0].sumTimeDif = tasks[0].times[0].timeDif;
       }
     }
   }

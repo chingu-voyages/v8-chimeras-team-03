@@ -9,6 +9,7 @@ import firebase, { auth } from "../../components/Firebase/firebase";
 import { dataPacking } from "../../services/dataPacking";
 import TaskList from "../../components/TaskList/TaskList";
 import { removeTask } from "../../services/removeTask";
+import Loader from "react-loader-spinner";
 
 class DashboardPage extends Component {
   constructor() {
@@ -31,11 +32,13 @@ class DashboardPage extends Component {
       minutes: "00",
       seconds: "00"
     },
+    loading: true,
     listofTasks: {} // object that holds all task data
   };
   handleLogOut = async event => {
     try {
       await auth.signOut();
+      localStorage.setItem("logged", true);
     } catch (error) {
       alert(error);
     }
@@ -52,7 +55,8 @@ class DashboardPage extends Component {
               var tasks = snapshot.val() || {};
               this.setState(() => {
                 return {
-                  listofTasks: tasks
+                  listofTasks: tasks,
+                  loading: false
                 };
               });
             },
@@ -100,63 +104,114 @@ class DashboardPage extends Component {
   };
 
   render() {
-    const { startTask, taskName, listofTasks } = this.state;
+    const { startTask, taskName, listofTasks, loading } = this.state;
     const { onTimerClick, onInputChange } = this;
     const { hours, minutes, seconds } = timeParser(this.state.timer);
 
     const tasks = dataPacking(listofTasks);
-
-    return (
-      <div className="dashboard">
-        <div className="menu">
-          <div className="logo">
-            <img src={logo} alt="logo" />
-            <p>toggl clone</p>
-          </div>
-          <button className="logout-btn">
-            <img src={logout} alt="logout button" onClick={this.handleLogOut} />
-            <p>Log Out</p>
-          </button>
-        </div>
-        <div className="main">
-          <form
-            onSubmit={e => {
-              e.preventDefault();
-            }}
-          >
-            <input
-              type="text"
-              placeholder="What are you working on?"
-              value={taskName}
-              onChange={onInputChange}
-            />
-            <div className="timer">
-              <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+    if (loading) {
+      return (
+        <div className="dashboard">
+          <div className="menu">
+            <div className="logo">
+              <img src={logo} alt="logo" />
+              <p>toggl clone</p>
             </div>
-            <img
-              src={startTask ? startButton : stopButton}
-              alt="button"
-              onClick={onTimerClick}
-            />
-          </form>
-          <div className="taskList">
-            <ul>
-              {tasks.length > 0
-                ? tasks.map((task, i) => {
-                    return (
-                      <TaskList
-                        key={i}
-                        task={task}
-                        removeTask={this.removeTask}
-                      />
-                    );
-                  })
-                : ""}
-            </ul>
+            <button className="logout-btn">
+              <img
+                src={logout}
+                alt="logout button"
+                onClick={this.handleLogOut}
+              />
+              <p>Log Out</p>
+            </button>
+          </div>
+          <div className="main">
+            <form
+              onSubmit={e => {
+                e.preventDefault();
+              }}
+            >
+              <input
+                type="text"
+                placeholder="What are you working on?"
+                value={taskName}
+                onChange={onInputChange}
+              />
+              <div className="timer">
+                <span>{hours}</span>:<span>{minutes}</span>:
+                <span>{seconds}</span>
+              </div>
+              <img
+                src={startTask ? startButton : stopButton}
+                alt="button"
+                onClick={onTimerClick}
+              />
+            </form>
+            <div className="taskList" style={{ textAlign: "center" }}>
+              <Loader type="Oval" color="red" height={80} width={80} />
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="dashboard">
+          <div className="menu">
+            <div className="logo">
+              <img src={logo} alt="logo" />
+              <p>toggl clone</p>
+            </div>
+            <button className="logout-btn">
+              <img
+                src={logout}
+                alt="logout button"
+                onClick={this.handleLogOut}
+              />
+              <p>Log Out</p>
+            </button>
+          </div>
+          <div className="main">
+            <form
+              onSubmit={e => {
+                e.preventDefault();
+              }}
+            >
+              <input
+                type="text"
+                placeholder="What are you working on?"
+                value={taskName}
+                onChange={onInputChange}
+              />
+              <div className="timer">
+                <span>{hours}</span>:<span>{minutes}</span>:
+                <span>{seconds}</span>
+              </div>
+              <img
+                src={startTask ? startButton : stopButton}
+                alt="button"
+                onClick={onTimerClick}
+              />
+            </form>
+            <div className="taskList">
+              <ul>
+                {tasks.length > 0
+                  ? tasks.map((task, i) => {
+                      return (
+                        <TaskList
+                          key={i}
+                          task={task}
+                          removeTask={this.removeTask}
+                        />
+                      );
+                    })
+                  : ""}
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 }
 export default DashboardPage;

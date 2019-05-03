@@ -10,36 +10,37 @@ class LoginPage extends Component {
     this.handleGoogleLogIn = this.handleGoogleLogIn.bind(this);
     this.state = {
       redirect: false
-    }
+    };
   }
   handleLogIn = async event => {
     event.preventDefault();
     const { email, password } = event.target.elements;
-    console.log(email);
     try {
       await auth.signInWithEmailAndPassword(email.value, password.value);
+      localStorage.setItem("logged", true);
       this.setState({
         redirect: true
       });
     } catch (error) {
       alert(error);
     }
-  }
+  };
   handleGoogleLogIn = async event => {
     event.preventDefault();
     try {
       await auth.signInWithPopup(provider);
+      localStorage.setItem("logged", true);
       this.setState({
         redirect: true
       });
     } catch (error) {
       alert(error);
     }
-  }
+  };
   render() {
     const { redirect } = this.state;
     if (redirect) {
-      return <Redirect to="/dashboard"/>
+      return <Redirect to="/dashboard" />;
     }
     return (
       <div className="login">
@@ -59,7 +60,10 @@ class LoginPage extends Component {
             <p>OR</p>
             <div className="hr" />
           </div>
-          <button onClick={this.handleGoogleLogIn} className="log-in-google-btn">
+          <button
+            onClick={this.handleGoogleLogIn}
+            className="log-in-google-btn"
+          >
             LOG IN WITH GOOGLE
             <span />
           </button>
