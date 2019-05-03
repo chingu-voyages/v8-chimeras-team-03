@@ -4,17 +4,14 @@ import { auth } from "../../components/Firebase/firebase";
 import classes from "./SignUpPage.module.scss";
 
 class SignUpPage extends Component {
-  constructor() {
-    super();
-    this.handleSignUp = this.handleSignUp.bind(this);
-    this.state = {
+  state = {
       redirect: false,
       email: "",
       password: "",
       repeatedPassword: "",
       userAgreedToTerms : false
     }
-  }
+
   handleSignUp = async event => {
     if(!this.canBeSubmitted){
       event.preventDefault();
@@ -51,6 +48,7 @@ class SignUpPage extends Component {
               userAgreedToTerms === true
           );
   }
+  
   render() {
     const isEnabled = this.canBeSubmitted();
     const { redirect } = this.state;

@@ -13,7 +13,6 @@ import { Helmet } from "react-helmet";
 class DashboardPage extends Component {
   constructor() {
     super();
-    this.handleLogOut = this.handleLogOut.bind(this);
     this.onTimerClick = onTimerClick.bind(this);
     this.removeTask = removeTask.bind(this);
   }
