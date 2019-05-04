@@ -16,6 +16,10 @@ export function timeParser(time) {
   if (seconds < 10) {
     seconds = "0" + seconds;
   }
+  hours += "";
+  minutes += "";
+  seconds += "";
+
   return {
     hours,
     minutes,
