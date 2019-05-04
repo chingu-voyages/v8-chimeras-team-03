@@ -109,6 +109,7 @@ class DashboardPage extends Component {
     const { hours, minutes, seconds } = timeParser(this.state.timer);
 
     const tasks = dataPacking(listofTasks);
+    console.log(tasks);
 
     return (
       <div className="dashboard">
@@ -160,7 +161,7 @@ class DashboardPage extends Component {
             </div>
           ) : (
             <div className="taskList">
-              <ul>
+              {/* <ul>
                 {tasks.length > 0
                   ? tasks.map((task, i) => {
                       return (
@@ -172,7 +173,7 @@ class DashboardPage extends Component {
                       );
                     })
                   : ""}
-              </ul>
+              </ul> */}
             </div>
           )}
         </div>
