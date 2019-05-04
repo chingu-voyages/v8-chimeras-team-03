@@ -38,7 +38,7 @@ class DashboardPage extends Component {
   handleLogOut = async event => {
     try {
       await auth.signOut();
-      localStorage.setItem("logged", true);
+      localStorage.setItem("isLogged", false);
     } catch (error) {
       alert(error);
     }

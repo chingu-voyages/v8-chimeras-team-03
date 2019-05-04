@@ -26,7 +26,7 @@ class App extends Component {
           return { isUserLogged: true };
         });
       } else {
-        localStorage.setItem("isLogged", true);
+        localStorage.setItem("isLogged", false);
         this.setState({
           isUserLogged: false
         });

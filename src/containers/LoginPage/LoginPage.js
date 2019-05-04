@@ -17,7 +17,7 @@ class LoginPage extends Component {
     const { email, password } = event.target.elements;
     try {
       await auth.signInWithEmailAndPassword(email.value, password.value);
-      localStorage.setItem("logged", true);
+      localStorage.setItem("IsLogged", true);
       this.setState({
         redirect: true
       });
@@ -29,7 +29,7 @@ class LoginPage extends Component {
     event.preventDefault();
     try {
       await auth.signInWithPopup(provider);
-      localStorage.setItem("logged", true);
+      localStorage.setItem("isLogged", true);
       this.setState({
         redirect: true
       });
