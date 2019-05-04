@@ -11,34 +11,39 @@ display today and yesterday
 restyle
 add when task has started and stopped
 animacija
-
   */
-
+  let date;
+  const yesterday = new Date(
+    new Date().setDate(new Date().getDate() - 1)
+  ).toLocaleDateString();
+  if (task[0] === new Date(Date.now()).toLocaleDateString()) {
+    date = "Today";
+  } else if (task[0] === yesterday) {
+    date = "Yesterday";
+  } else {
+    date = task[0];
+  }
   return (
     <div>
-      <div className="date">DATE: {task[0]}</div>
+      <div className="date">{date}</div>
       {data.map((sameNameTasks, i) => {
         return (
           <div key={i}>
             <li>
               <div className="task">
                 <div className="task-name">
-                  {sameNameTasks.taskName}{" "}
                   {sameNameTasks.times.length > 1 ? (
                     <span
                       className="num-of-subtasks"
                       style={{ cursor: "pointer" }}
                       onClick={e => {
-                        if (
+                        const element =
                           e.currentTarget.parentElement.parentElement
-                            .parentElement.parentElement.childNodes[1].style
-                            .display === "none"
-                        ) {
-                          e.currentTarget.parentElement.parentElement.parentElement.parentElement.childNodes[1].style.display =
-                            "block";
+                            .parentElement.parentElement;
+                        if (element.childNodes[1].style.display === "none") {
+                          element.childNodes[1].style.display = "block";
                         } else {
-                          e.currentTarget.parentElement.parentElement.parentElement.parentElement.childNodes[1].style.display =
-                            "none";
+                          element.childNodes[1].style.display = "none";
                         }
                       }}
                     >
@@ -47,6 +52,7 @@ animacija
                   ) : (
                     ""
                   )}
+                  <span>{sameNameTasks.taskName} </span>
                 </div>
                 <div className="task-duration">
                   {removeNaN(
@@ -54,22 +60,22 @@ animacija
                     timeParser(sameNameTasks.sumTimeDif / 1000).minutes,
                     timeParser(sameNameTasks.sumTimeDif / 1000).seconds
                   )}
+                  <span
+                    style={{ color: "red", cursor: "pointer" }}
+                    onClick={event => {
+                      const element =
+                        event.target.parentElement.parentElement.parentElement
+                          .parentElement;
+                      if (element.childNodes[1].nodeName !== "#text") {
+                        element.childNodes[1].style.display = "none";
+                      }
+
+                      removeTask(sameNameTasks.taskId);
+                    }}
+                  >
+                    X
+                  </span>
                 </div>
-
-                <span
-                  style={{ color: "red", cursor: "pointer" }}
-                  onClick={event => {
-                    const element =
-                      event.target.parentElement.parentElement.parentElement;
-                    if (element.childNodes[1].nodeName !== "#text") {
-                      element.childNodes[1].style.display = "none";
-                    }
-
-                    removeTask(sameNameTasks.taskId);
-                  }}
-                >
-                  X
-                </span>
               </div>
             </li>
 
