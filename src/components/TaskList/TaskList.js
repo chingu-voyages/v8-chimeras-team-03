@@ -9,7 +9,8 @@ export default function TaskList(props) {
 
   return (
     <div>
-      DATE: {task[0]}
+      <div className="date">DATE: {task[0]}</div>
+      {console.log(task[0] === "Invalid Date")}
       {data.map((sameNameTasks, i) => {
         return (
           <div key={i}>

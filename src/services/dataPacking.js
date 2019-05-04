@@ -9,7 +9,7 @@ export function dataPacking(listofTasks) {
     for (x in listofTasks) {
       //  1. sorting by date
       const currentTask = listofTasks[x];
-      const date = new Date(currentTask.endTime).toLocaleDateString();
+      const date = new Date(currentTask.startTime).toLocaleDateString();
       const dateIndex = days.findIndex(element => {
         return element[0] === date;
       });
