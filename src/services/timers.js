@@ -48,12 +48,14 @@ export function onTimerClick() {
     // stop timer
     clearInterval(this.state.intervalId);
     localStorage.setItem("isActive", false);
-    this.setState({
+    localStorage.removeItem("taskId")
+    console.log("timer stoped")
+    this.setState(()=>({
       startTask: true,
       endTime: Date.now(),
       intervalId: "",
       timer: 0
-    });
+    }))
   }
 }
 
