@@ -109,90 +109,45 @@ class DashboardPage extends Component {
     const { hours, minutes, seconds } = timeParser(this.state.timer);
 
     const tasks = dataPacking(listofTasks);
-    if (loading) {
-      return (
-        <div className="dashboard">
-          <div className="menu">
-            <div className="logo">
-              <img src={logo} alt="logo" />
-              <p>toggl clone</p>
-            </div>
-            <button className="logout-btn">
-              <img
-                src={logout}
-                alt="logout button"
-                onClick={this.handleLogOut}
-              />
-              <p>Log Out</p>
-            </button>
+
+    return (
+      <div className="dashboard">
+        <div className="menu">
+          <div className="logo">
+            <img src={logo} alt="logo" />
+            <p>toggl clone</p>
           </div>
-          <div className="main">
-            <form
-              onSubmit={e => {
-                e.preventDefault();
-              }}
-            >
-              <input
-                type="text"
-                placeholder="What are you working on?"
-                value={taskName}
-                onChange={onInputChange}
-              />
-              <div className="timer">
-                <span>{hours}</span>:<span>{minutes}</span>:
-                <span>{seconds}</span>
-              </div>
-              <img
-                src={startTask ? startButton : stopButton}
-                alt="button"
-                onClick={onTimerClick}
-              />
-            </form>
-            <div className="taskList" style={{ textAlign: "center" }}>
+          <button className="logout-btn">
+            <img src={logout} alt="logout button" onClick={this.handleLogOut} />
+            <p>Log Out</p>
+          </button>
+        </div>
+        <div className="main">
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+            }}
+          >
+            <input
+              type="text"
+              placeholder="What are you working on?"
+              value={taskName}
+              onChange={onInputChange}
+            />
+            <div className="timer">
+              <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+            </div>
+            <img
+              src={startTask ? startButton : stopButton}
+              alt="button"
+              onClick={onTimerClick}
+            />
+          </form>
+          {loading ? (
+            <div style={{ textAlign: "center", marginTop: "100px" }}>
               <Loader type="Oval" color="red" height={80} width={80} />
             </div>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="dashboard">
-          <div className="menu">
-            <div className="logo">
-              <img src={logo} alt="logo" />
-              <p>toggl clone</p>
-            </div>
-            <button className="logout-btn">
-              <img
-                src={logout}
-                alt="logout button"
-                onClick={this.handleLogOut}
-              />
-              <p>Log Out</p>
-            </button>
-          </div>
-          <div className="main">
-            <form
-              onSubmit={e => {
-                e.preventDefault();
-              }}
-            >
-              <input
-                type="text"
-                placeholder="What are you working on?"
-                value={taskName}
-                onChange={onInputChange}
-              />
-              <div className="timer">
-                <span>{hours}</span>:<span>{minutes}</span>:
-                <span>{seconds}</span>
-              </div>
-              <img
-                src={startTask ? startButton : stopButton}
-                alt="button"
-                onClick={onTimerClick}
-              />
-            </form>
+          ) : (
             <div className="taskList">
               <ul>
                 {tasks.length > 0
@@ -208,10 +163,10 @@ class DashboardPage extends Component {
                   : ""}
               </ul>
             </div>
-          </div>
+          )}
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 export default DashboardPage;
