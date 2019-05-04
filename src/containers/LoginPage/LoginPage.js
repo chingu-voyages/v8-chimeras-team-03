@@ -4,11 +4,17 @@ import "./LoginPage.scss";
 import { auth, provider } from "../../components/Firebase/firebase";
 
 class LoginPage extends Component {
-  state = {
-    redirect: false,
-    email: false,
-    password: false
-  };
+
+  constructor() {
+    super();
+    this.handleLogIn = this.handleLogIn.bind(this);
+    this.handleGoogleLogIn = this.handleGoogleLogIn.bind(this);
+    this.state = {
+      redirect: false,
+      email: false,
+      password: false
+    };
+  }
 
   handleLogIn = async event => {
     if (!this.canBeSubmitted) {
@@ -18,6 +24,7 @@ class LoginPage extends Component {
     const { email, password } = event.target.elements;
     try {
       await auth.signInWithEmailAndPassword(email.value, password.value);
+      localStorage.setItem("IsLogged", true);
       this.setState({
         redirect: true
       });
@@ -29,6 +36,7 @@ class LoginPage extends Component {
     event.preventDefault();
     try {
       await auth.signInWithPopup(provider);
+      localStorage.setItem("isLogged", true);
       this.setState({
         redirect: true
       });
@@ -36,6 +44,7 @@ class LoginPage extends Component {
       alert(error);
     }
   };
+
   handleEmail = event => {
     event.target.value
       ? this.setState({ email: true })

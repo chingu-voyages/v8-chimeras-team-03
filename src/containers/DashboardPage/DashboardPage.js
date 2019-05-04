@@ -9,7 +9,9 @@ import firebase, { auth } from "../../components/Firebase/firebase";
 import { dataPacking } from "../../services/dataPacking";
 import TaskList from "../../components/TaskList/TaskList";
 import { removeTask } from "../../services/removeTask";
+import Loader from "react-loader-spinner";
 import { Helmet } from "react-helmet";
+
 class DashboardPage extends Component {
   constructor() {
     super();
@@ -30,11 +32,13 @@ class DashboardPage extends Component {
       minutes: "00",
       seconds: "00"
     },
+    loading: true,
     listofTasks: {} // object that holds all task data
   };
   handleLogOut = async event => {
     try {
       await auth.signOut();
+      localStorage.setItem("isLogged", false);
     } catch (error) {
       alert(error);
     }
@@ -51,7 +55,8 @@ class DashboardPage extends Component {
               var tasks = snapshot.val() || {};
               this.setState(() => {
                 return {
-                  listofTasks: tasks
+                  listofTasks: tasks,
+                  loading: false
                 };
               });
             },
@@ -99,7 +104,7 @@ class DashboardPage extends Component {
   };
 
   render() {
-    const { startTask, taskName, listofTasks, timer } = this.state;
+    const { startTask, taskName, listofTasks, loading, timer } = this.state;
     const { onTimerClick, onInputChange } = this;
     const { hours, minutes, seconds } = timeParser(this.state.timer);
 
@@ -149,21 +154,27 @@ class DashboardPage extends Component {
               onClick={onTimerClick}
             />
           </form>
-          <div className="taskList">
-            <ul>
-              {tasks.length > 0
-                ? tasks.map((task, i) => {
-                    return (
-                      <TaskList
-                        key={i}
-                        task={task}
-                        removeTask={this.removeTask}
-                      />
-                    );
-                  })
-                : ""}
-            </ul>
-          </div>
+          {loading ? (
+            <div style={{ textAlign: "center", marginTop: "100px" }}>
+              <Loader type="Oval" color="red" height={80} width={80} />
+            </div>
+          ) : (
+            <div className="taskList">
+              <ul>
+                {tasks.length > 0
+                  ? tasks.map((task, i) => {
+                      return (
+                        <TaskList
+                          key={i}
+                          task={task}
+                          removeTask={this.removeTask}
+                        />
+                      );
+                    })
+                  : ""}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     );
