@@ -25,6 +25,10 @@ export function dataPacking(listofTasks) {
           const currentName = currentDate[nameIndex];
           // console.log(currentTask);
           currentName.taskId.unshift(x);
+          currentName.sumTimeDif =
+            currentName.sumTimeDif +
+            currentTask.endTime -
+            currentTask.startTime;
           currentName.times.unshift({
             startTime: currentTask.startTime,
             endTime: currentTask.endTime,
@@ -35,6 +39,7 @@ export function dataPacking(listofTasks) {
           currentDate.unshift({
             taskId: [x],
             taskName: currentTask.taskName,
+            sumTimeDif: currentTask.endTime - currentTask.startTime,
             times: [
               {
                 startTime: currentTask.startTime,
@@ -52,13 +57,15 @@ export function dataPacking(listofTasks) {
             {
               taskId: [x],
               taskName: currentTask.taskName,
+              sumTimeDif: currentTask.endTime - currentTask.startTime,
               times: [
                 {
                   startTime: currentTask.startTime,
                   endTime: currentTask.endTime,
                   timeDif: currentTask.endTime - currentTask.startTime
                 }
-              ]
+              ],
+              sumTimeDif: currentTask.endTime - currentTask.startTime
             }
           ]
         ]);
