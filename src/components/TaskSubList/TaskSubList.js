@@ -13,16 +13,16 @@ export default function SubList(props) {
             timeParser(props.subTask.timeDif / 1000).minutes,
             timeParser(props.subTask.timeDif / 1000).seconds
           )}
+          <span
+            style={{ cursor: "pointer", color: "red" }}
+            onClick={() => {
+              let i = 1;
+              props.removeTask([props.task.taskId[i]]);
+            }}
+          >
+            X
+          </span>
         </div>
-        <span
-          style={{ cursor: "pointer", color: "red" }}
-          onClick={() => {
-            let i = 1;
-            props.removeTask([props.task.taskId[i]]);
-          }}
-        >
-          X
-        </span>
       </div>
     </li>
   );

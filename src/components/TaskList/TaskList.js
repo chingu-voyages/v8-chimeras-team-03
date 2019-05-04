@@ -25,7 +25,19 @@ animacija
   }
   return (
     <div>
-      <div className="date">{date}</div>
+      <div className="date" style={{ fontWeight: "bold" }}>
+        <div>{date}</div>
+        <div
+          style={{ marginRight: "20px", fontWeight: "bold" }}
+          className="date-time"
+        >
+          {removeNaN(
+            timeParser(task[2] / 1000).hours,
+            timeParser(task[2] / 1000).minutes,
+            timeParser(task[2] / 1000).seconds
+          )}
+        </div>
+      </div>
       {data.map((sameNameTasks, i) => {
         return (
           <div key={i}>
@@ -35,8 +47,16 @@ animacija
                   {sameNameTasks.times.length > 1 ? (
                     <span
                       className="num-of-subtasks"
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer", backgroundColor: "white" }}
                       onClick={e => {
+                        const style = e.target.style;
+                        if (style.backgroundColor == "white") {
+                          style.backgroundColor = "GhostWhite";
+                          style.color = "green";
+                        } else {
+                          style.backgroundColor = "white";
+                          style.color = "black";
+                        }
                         const element =
                           e.currentTarget.parentElement.parentElement
                             .parentElement.parentElement;
@@ -52,7 +72,9 @@ animacija
                   ) : (
                     ""
                   )}
-                  <span>{sameNameTasks.taskName} </span>
+                  <span style={{ display: "flex", alignItems: "center" }}>
+                    {sameNameTasks.taskName}{" "}
+                  </span>
                 </div>
                 <div className="task-duration">
                   {removeNaN(

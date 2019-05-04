@@ -114,6 +114,10 @@
         display: flex;
         flex-direction: column;
         box-shadow: rgba($color: #000000, $alpha: 0.16) 0 3px 6px;
+        .task:hover {
+          background-color: ghostwhite;
+        }
+
         .task {
           display: flex;
           align-items: center;
@@ -128,15 +132,6 @@
             display: flex;
             overflow: hidden;
             width: 60vw;
-            // @media screen and (min-width: 576px) {
-            //   width: 300px;
-            // }
-            // @media screen and (min-width: 768px) {
-            //   width: 500px;
-            // }
-            // @media screen and (min-width: 1024px) {
-            //   width: 700px;
-            // }
           }
           .task-duration {
             span {

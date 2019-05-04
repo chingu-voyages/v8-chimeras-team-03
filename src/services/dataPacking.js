@@ -23,7 +23,6 @@ export function dataPacking(listofTasks) {
         if (nameIndex !== -1) {
           // same date and same name
           const currentName = currentDate[nameIndex];
-          // console.log(currentTask);
           currentName.taskId.unshift(x);
           currentName.sumTimeDif =
             currentName.sumTimeDif +
@@ -35,6 +34,7 @@ export function dataPacking(listofTasks) {
             timeDif: currentTask.endTime - currentTask.startTime
           });
           array_move(currentDate, nameIndex, 0);
+          days[dateIndex][2] += currentTask.endTime - currentTask.startTime;
         } else {
           // same date and different name
           currentDate.unshift({
@@ -49,6 +49,7 @@ export function dataPacking(listofTasks) {
               }
             ]
           });
+          days[dateIndex][2] += currentTask.endTime - currentTask.startTime;
         }
       } else {
         // different date
@@ -65,14 +66,15 @@ export function dataPacking(listofTasks) {
                   endTime: currentTask.endTime,
                   timeDif: currentTask.endTime - currentTask.startTime
                 }
-              ],
-              sumTimeDif: currentTask.endTime - currentTask.startTime
+              ]
             }
-          ]
+          ],
+          currentTask.endTime - currentTask.startTime
         ]);
       }
     }
   }
+
   return days;
 }
 
