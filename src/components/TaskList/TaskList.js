@@ -10,35 +10,31 @@ export default function TaskList(props) {
   return (
     <div>
       DATE: {task[0]}
-      {data.map(sameNameTasks => {
-        console.log(sameNameTasks);
+      {data.map((sameNameTasks, i) => {
         return (
-          <div>
-            <li
-              style={{ cursor: "pointer" }}
-              onClick={e => {
-                if (
-                  e.currentTarget.parentElement.childNodes[1].childNodes
-                    .length > 1
-                ) {
-                  if (
-                    e.currentTarget.parentElement.childNodes[1].style
-                      .display === "none"
-                  ) {
-                    e.currentTarget.parentElement.childNodes[1].style.display =
-                      "block";
-                  } else {
-                    e.currentTarget.parentElement.childNodes[1].style.display =
-                      "none";
-                  }
-                }
-              }}
-            >
+          <div key={i}>
+            <li>
               <div className="task">
                 <div className="task-name">
                   {sameNameTasks.taskName}{" "}
                   {sameNameTasks.times.length > 1 ? (
-                    <span className="num-of-subtasks">
+                    <span
+                      className="num-of-subtasks"
+                      style={{ cursor: "pointer" }}
+                      onClick={e => {
+                        if (
+                          e.currentTarget.parentElement.parentElement
+                            .parentElement.parentElement.childNodes[1].style
+                            .display === "none"
+                        ) {
+                          e.currentTarget.parentElement.parentElement.parentElement.parentElement.childNodes[1].style.display =
+                            "block";
+                        } else {
+                          e.currentTarget.parentElement.parentElement.parentElement.parentElement.childNodes[1].style.display =
+                            "none";
+                        }
+                      }}
+                    >
                       {sameNameTasks.times.length}
                     </span>
                   ) : (
@@ -54,14 +50,20 @@ export default function TaskList(props) {
                 </div>
 
                 <span
-                  style={{ color: "red" }}
-                  onClick={() => removeTask(sameNameTasks.taskId)}
+                  style={{ color: "red", cursor: "pointer" }}
+                  onClick={event => {
+                    event.target.parentElement.parentElement.parentElement.childNodes[1].style.display =
+                      "none"; // fix for display bug
+
+                    removeTask(sameNameTasks.taskId);
+                  }}
                 >
                   X
                 </span>
               </div>
             </li>
-            {sameNameTasks.singleTask ? (
+
+            {sameNameTasks.times.length <= 1 ? (
               ""
             ) : (
               <div style={{ display: "none" }}>
@@ -70,7 +72,7 @@ export default function TaskList(props) {
                     <SubList
                       key={i}
                       subTask={subTask}
-                      task={task}
+                      task={sameNameTasks}
                       removeTask={removeTask}
                     />
                   );
