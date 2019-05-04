@@ -6,11 +6,17 @@ import "./TaskList.scss";
 export default function TaskList(props) {
   const { task, removeTask } = props;
   const data = task[1];
+  /* 
+display today and yesterday
+restyle
+add when task has started and stopped
+animacija
+
+  */
 
   return (
     <div>
       <div className="date">DATE: {task[0]}</div>
-      {console.log(task[0] === "Invalid Date")}
       {data.map((sameNameTasks, i) => {
         return (
           <div key={i}>
@@ -53,8 +59,11 @@ export default function TaskList(props) {
                 <span
                   style={{ color: "red", cursor: "pointer" }}
                   onClick={event => {
-                    event.target.parentElement.parentElement.parentElement.childNodes[1].style.display =
-                      "none"; // fix for display bug
+                    const element =
+                      event.target.parentElement.parentElement.parentElement;
+                    if (element.childNodes[1].nodeName !== "#text") {
+                      element.childNodes[1].style.display = "none";
+                    }
 
                     removeTask(sameNameTasks.taskId);
                   }}
