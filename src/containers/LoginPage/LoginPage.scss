@@ -204,6 +204,9 @@ $red: #e1393f;
       }
     }
   }
+  .log-in-btn:disabled {
+    background-color: $grey;
+  }
   .log-in-google-btn {
     cursor: pointer;
     border: 1px solid black;

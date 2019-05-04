@@ -4,16 +4,23 @@ import "./LoginPage.scss";
 import { auth, provider } from "../../components/Firebase/firebase";
 
 class LoginPage extends Component {
+
   constructor() {
     super();
     this.handleLogIn = this.handleLogIn.bind(this);
     this.handleGoogleLogIn = this.handleGoogleLogIn.bind(this);
     this.state = {
-      redirect: false
+      redirect: false,
+      email: false,
+      password: false
     };
   }
+
   handleLogIn = async event => {
-    event.preventDefault();
+    if (!this.canBeSubmitted) {
+      event.preventDefault();
+      return;
+    }
     const { email, password } = event.target.elements;
     try {
       await auth.signInWithEmailAndPassword(email.value, password.value);
@@ -37,8 +44,25 @@ class LoginPage extends Component {
       alert(error);
     }
   };
+
+  handleEmail = event => {
+    event.target.value
+      ? this.setState({ email: true })
+      : this.setState({ email: false });
+  };
+  handlePassword = event => {
+    event.target.value
+      ? this.setState({ password: true })
+      : this.setState({ password: false });
+  };
+  canBeSubmitted = () => {
+    const { email, password } = this.state;
+    return email && password;
+  };
+
   render() {
     const { redirect } = this.state;
+    const isEnabled = this.canBeSubmitted();
     if (redirect) {
       return <Redirect to="/dashboard" />;
     }
@@ -48,11 +72,15 @@ class LoginPage extends Component {
         <p>Log in to your Toggl account.</p>
         <form onSubmit={this.handleLogIn} className="form">
           <label htmlFor="email">EMAIL ADDRESS</label>
-          <input type="email" id="email" />
+          <input type="email" id="email" onChange={this.handleEmail} />
           <label htmlFor="password">PASSWORD</label>
-          <input type="password" id="password" />
+          <input
+            type="password"
+            id="password"
+            onChange={this.handlePassword}
+          />
           <p>Forgot password?</p>
-          <button className="log-in-btn">
+          <button className="log-in-btn" disabled={!isEnabled}>
             LOG IN <span />
           </button>
           <div className="or">
