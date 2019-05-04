@@ -1,0 +1,136 @@
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fafbfc;
+  .menu {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #323232;
+    width: 46px;
+    align-items: center;
+    @media screen and (min-width: 1280px) {
+      width: 159px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+      @media screen and (min-width: 1280px) {
+        margin-top: 12px;
+      }
+      img {
+        width: 25px;
+        height: 25px;
+      }
+      p {
+        display: none;
+        @media screen and (min-width: 1280px) {
+          display: inline-block;
+          color: white;
+          margin-left: 6px;
+        }
+      }
+      margin-bottom: auto;
+    }
+    .logout-btn {
+      background-color: transparent;
+      border-color: transparent;
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      @media screen and (min-width: 1280px) {
+        margin-bottom: 12px;
+      }
+      img {
+        width: 25px;
+        height: 25px;
+      }
+      img:hover {
+        width: 30px;
+        height: 30px;
+      }
+      img:active {
+        width: 25px;
+        height: 25px;
+      }
+      p {
+        display: none;
+        @media screen and (min-width: 1280px) {
+          display: inline-block;
+          color: white;
+          margin-left: 6px;
+        }
+      }
+    }
+  }
+  .main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    form {
+      display: flex;
+      height: 49px;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: rgba($color: #000000, $alpha: 0.16) 0 3px 6px;
+      input {
+        background-color: inherit;
+        flex-grow: 1;
+        font-size: 14px;
+        min-width: 197px;
+        overflow: hidden;
+        border: none;
+        outline: none;
+        margin-left: 13px;
+      }
+      input::placeholder {
+        color: #7f7b7b;
+      }
+      .timer {
+        font-size: 14px;
+      }
+      img {
+        width: 27px;
+        height: 27px;
+        margin-right: 15px;
+        margin-left: 20px;
+        @media screen and (min-width: 768px) {
+          margin-right: 80px;
+        }
+      }
+    }
+    .taskList {
+      display: flex;
+      flex-direction: column;
+      margin-top: 50px;
+      background-color: white;
+      ul {
+        padding-top: 25px;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        box-shadow: rgba($color: #000000, $alpha: 0.16) 0 3px 6px;
+        .task {
+          display: flex;
+          justify-content: space-between;
+          padding: 10px 15px 10px 13px;
+          border-bottom: 2px #e8e8e8 solid;
+          @media screen and (min-width: 768px) {
+            padding-right: 80px;
+            padding-left: 13px;
+          }
+          .task-name {
+          }
+          .task-duration {
+            margin-left: 50%;
+            position: absolute;
+          }
+        }
+      }
+    }
+  }
+}
