@@ -113,6 +113,7 @@ export default function TaskList(props) {
                   return (
                     <SubList
                       key={i}
+                      i={i}
                       subTask={subTask}
                       task={sameNameTasks}
                       removeTask={removeTask}

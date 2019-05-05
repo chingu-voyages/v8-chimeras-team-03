@@ -28,8 +28,8 @@ export default function SubList(props) {
           <span
             style={{ cursor: "pointer", color: "red" }}
             onClick={() => {
-              let i = 1;
-              props.removeTask([props.task.taskId[i]]);
+              console.log(props.i);
+              props.removeTask([props.task.taskId[props.i]]);
             }}
           >
             X
