@@ -78,7 +78,10 @@ export default function TaskList(props) {
                     timeParser(sameNameTasks.sumTimeDif / 1000).minutes,
                     timeParser(sameNameTasks.sumTimeDif / 1000).seconds
                   )}
-                  <Buttons />
+                  <Buttons
+                    taskRestart={props.taskRestart}
+                    name={sameNameTasks.taskName}
+                  />
                   <span
                     style={{
                       color: "red",
