@@ -56,7 +56,6 @@ $red: #e1393f;
     margin-top: 34px;
   }
   button {
-    // last button on the page
     cursor: pointer;
     z-index: 3;
     position: relative;
@@ -120,12 +119,12 @@ $red: #e1393f;
   @media screen and (min-width: 768px) {
     margin-top: 80px;
     width: 441px;
-    height: 550px;
+    height: 470px;
   }
   @media screen and (min-width: 1280px) {
     margin-top: 82px;
     width: 653px;
-    height: 800px;
+    height: 650px;
     padding: 50px 65px 0 65px;
   }
   label {
@@ -156,13 +155,10 @@ $red: #e1393f;
     }
   }
   div {
-    // display: inline;
-    // changed to display: flex
     display: flex;
     align-items: center;
     input {
       width: 30px;
-      // changed mb
       @media screen and(min-width: 768px) {
         margin-bottom: 7px;
       }
@@ -170,7 +166,6 @@ $red: #e1393f;
     p {
       display: inline;
       text-decoration: none;
-      // added margins
       margin-left: 10px;
       @media screen and(min-width: 768px) {
         margin-left: 14px;
@@ -183,16 +178,12 @@ $red: #e1393f;
   }
 
   p {
-    // forgot password
     font-size: 14px;
     text-decoration: underline;
     font-weight: bold;
     color: black;
     opacity: 1;
-    margin-top: 0; // overwritten mt
-    @media screen and (min-width: 768px) {
-      // margin-top: 16px;
-    }
+    margin-top: 0;
   }
   .sign-up-btn {
     cursor: pointer;
@@ -244,23 +235,17 @@ $red: #e1393f;
     text-align: center;
     background-color: white;
     margin-top: 18px;
-    ///// ////////////////////////
     margin-bottom: 32px;
-    ///////////////////////////
     @media screen and (min-width: 768px) {
       width: 350px;
-      //////////////
       margin-bottom: 50px;
-      /////////////
     }
     @media screen and (min-width: 1280px) {
       width: 518px;
       height: 49px;
       font-size: 20px;
       margin-top: 47px;
-      ////
       margin-bottom: 61px;
-      ////
     }
     span {
       width: 0;

@@ -4,17 +4,11 @@ import "./LoginPage.scss";
 import { auth, provider } from "../../components/Firebase/firebase";
 
 class LoginPage extends Component {
-
-  constructor() {
-    super();
-    this.handleLogIn = this.handleLogIn.bind(this);
-    this.handleGoogleLogIn = this.handleGoogleLogIn.bind(this);
-    this.state = {
-      redirect: false,
-      email: false,
-      password: false
-    };
-  }
+  state = {
+    redirect: false,
+    email: false,
+    password: false
+  };
 
   handleLogIn = async event => {
     if (!this.canBeSubmitted) {
@@ -24,7 +18,7 @@ class LoginPage extends Component {
     const { email, password } = event.target.elements;
     try {
       await auth.signInWithEmailAndPassword(email.value, password.value);
-      localStorage.setItem("IsLogged", true);
+      localStorage.setItem("isLogged", true);
       this.setState({
         redirect: true
       });
@@ -74,11 +68,7 @@ class LoginPage extends Component {
           <label htmlFor="email">EMAIL ADDRESS</label>
           <input type="email" id="email" onChange={this.handleEmail} />
           <label htmlFor="password">PASSWORD</label>
-          <input
-            type="password"
-            id="password"
-            onChange={this.handlePassword}
-          />
+          <input type="password" id="password" onChange={this.handlePassword} />
           <p>Forgot password?</p>
           <button className="log-in-btn" disabled={!isEnabled}>
             LOG IN <span />
