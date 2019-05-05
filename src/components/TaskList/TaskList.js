@@ -2,6 +2,7 @@ import React from "react";
 import SubList from "../TaskSubList/TaskSubList";
 import { timeParser, removeNaN } from "../../services/timers";
 import "./TaskList.scss";
+import Buttons from "../Buttons/Buttons";
 
 export default function TaskList(props) {
   const { task, removeTask } = props;
@@ -77,8 +78,16 @@ export default function TaskList(props) {
                     timeParser(sameNameTasks.sumTimeDif / 1000).minutes,
                     timeParser(sameNameTasks.sumTimeDif / 1000).seconds
                   )}
+                  <Buttons
+                    taskRestart={props.taskRestart}
+                    name={sameNameTasks.taskName}
+                  />
                   <span
-                    style={{ color: "red", cursor: "pointer" }}
+                    style={{
+                      color: "red",
+                      cursor: "pointer",
+                      marginLeft: "15px"
+                    }}
                     onClick={event => {
                       const element =
                         event.target.parentElement.parentElement.parentElement
