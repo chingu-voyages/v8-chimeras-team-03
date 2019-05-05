@@ -2,7 +2,7 @@ import firebase from "../components/Firebase/firebase";
 import { stopTimer } from "./timers";
 export async function removeTask(taskId) {
   this.stopTimer = stopTimer.bind(this);
-
+  console.log(taskId[0], this.state.taskId);
   if (taskId[0] == this.state.taskId) {
     // check if the task user wants to delete is currently beeing worked on
     console.log("hey");
