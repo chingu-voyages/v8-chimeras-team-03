@@ -21,7 +21,7 @@ class DashboardPage extends Component {
   state = {
     startTask: true, // check if task should start or end
     id: "", // mock for id
-    taskId: "",
+    taskId: localStorage.getItem("taskId") !== null ? localStorage.getItem("taskId"): "",
     startTime: 0, // start time in miliseconds
     endTime: 0, // end time in milliseconds
     taskName: "",
@@ -33,6 +33,7 @@ class DashboardPage extends Component {
       seconds: "00"
     },
     loading: true,
+    haveUnfinishedBusiness: localStorage.getItem("taskId") !== null ? true : false,
     listofTasks: {} // object that holds all task data
   };
   handleLogOut = async event => {
@@ -53,6 +54,30 @@ class DashboardPage extends Component {
             "value",
             snapshot => {
               var tasks = snapshot.val() || {};
+              /// local storage
+              var x;
+              console.log(localStorage.getItem("taskId")!== null)
+              if(this.state.haveUnfinishedBusiness){
+                this.setState(()=>({haveUnfinishedBusiness:false}))
+              for( x in tasks) {
+                if(x === this.state.taskId) {
+                  this.setState(()=>({
+                    taskName: tasks[x].taskName,
+                    startTask: false,
+                    timer : Math.floor(Date.now() - tasks[x].startTime)/1000
+                  }))
+                  // console.log("hello from comp will mount")
+                  const interval = setInterval(() => {
+                    this.setState(prevState => ({
+                      timer: prevState.timer + 1
+                    }));
+                  }, 1000);
+                  
+                  this.setState({
+                    intervalId: interval
+                  });
+                }
+              }}
               this.setState(() => {
                 return {
                   listofTasks: tasks,
@@ -88,6 +113,7 @@ class DashboardPage extends Component {
       });
     }
     if (this.state.endTime !== prevState.endTime) {
+      console.log("update", "user", this.state.id, "task",  this.state.taskId)
       firebase
         .database()
         .ref("tasks/" + this.state.id + "/" + this.state.taskId)
@@ -109,7 +135,7 @@ class DashboardPage extends Component {
     const { hours, minutes, seconds } = timeParser(this.state.timer);
     const tasks = dataPacking(listofTasks);
 
-    console.log(listofTasks);
+    console.log(tasks);
 
     return (
       <div className="dashboard">
