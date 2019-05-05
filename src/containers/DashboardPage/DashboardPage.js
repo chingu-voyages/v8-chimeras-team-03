@@ -107,7 +107,6 @@ class DashboardPage extends Component {
     const { startTask, taskName, listofTasks, loading, timer } = this.state;
     const { onTimerClick, onInputChange } = this;
     const { hours, minutes, seconds } = timeParser(this.state.timer);
-
     const tasks = dataPacking(listofTasks);
     return (
       <div className="dashboard">
