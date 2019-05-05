@@ -128,7 +128,8 @@ class DashboardPage extends Component {
         .database()
         .ref("tasks/" + this.state.id + "/" + this.state.taskId)
         .update({
-          endTime: this.state.endTime
+          endTime: this.state.endTime,
+          taskName: this.state.taskName
         });
     }
   }
