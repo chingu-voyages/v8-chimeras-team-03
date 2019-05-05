@@ -17,10 +17,30 @@
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
+  border-bottom: 2px #e8e8e8 solid;
+  padding-bottom: 15px;
 }
 
 .date-time {
   @media screen and (min-width: 768px) {
     padding-right: 60px;
+  }
+}
+
+.sub-task-name {
+  display: none;
+  width: 30vw;
+  overflow: hidden;
+  align-items: center;
+  @media screen and (min-width: 576px) {
+    width: 40vw;
+    display: flex;
+  }
+}
+
+#sub-task {
+  justify-content: flex-end;
+  @media screen and (min-width: 576px) {
+    justify-content: space-between;
   }
 }

@@ -6,12 +6,7 @@ import "./TaskList.scss";
 export default function TaskList(props) {
   const { task, removeTask } = props;
   const data = task[1];
-  /* 
-display today and yesterday
-restyle
-add when task has started and stopped
-animacija
-  */
+
   let date;
   const yesterday = new Date(
     new Date().setDate(new Date().getDate() - 1)
