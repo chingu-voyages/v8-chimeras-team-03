@@ -5,69 +5,116 @@ import "./TaskList.scss";
 
 export default function TaskList(props) {
   const { task, removeTask } = props;
+  const data = task[1];
 
+  let date;
+  const yesterday = new Date(
+    new Date().setDate(new Date().getDate() - 1)
+  ).toLocaleDateString();
+  if (task[0] === new Date(Date.now()).toLocaleDateString()) {
+    date = "Today";
+  } else if (task[0] === yesterday) {
+    date = "Yesterday";
+  } else {
+    date = task[0];
+  }
   return (
     <div>
-      <li
-        style={{ cursor: "pointer" }}
-        onClick={e => {
-          if (
-            e.currentTarget.parentElement.childNodes[1].childNodes.length > 1
-          ) {
-            if (
-              e.currentTarget.parentElement.childNodes[1].style.display ===
-              "none"
-            ) {
-              e.currentTarget.parentElement.childNodes[1].style.display =
-                "block";
-            } else {
-              e.currentTarget.parentElement.childNodes[1].style.display =
-                "none";
-            }
-          }
-        }}
-      >
-        <div className="task">
-          <div className="task-name">
-            {task.taskName}{" "}
-            {task.times.length > 1 ? (
-              <span className="num-of-subtasks">{task.times.length}</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="task-duration">
-            {removeNaN(
-              timeParser(task.sumTimeDif / 1000).hours,
-              timeParser(task.sumTimeDif / 1000).minutes,
-              timeParser(task.sumTimeDif / 1000).seconds
-            )}
-          </div>
+      <div className="date" style={{ fontWeight: "bold" }}>
+        <div>{date}</div>
+        <div
+          style={{ marginRight: "20px", fontWeight: "bold" }}
+          className="date-time"
+        >
+          {removeNaN(
+            timeParser(task[2] / 1000).hours,
+            timeParser(task[2] / 1000).minutes,
+            timeParser(task[2] / 1000).seconds
+          )}
+        </div>
+      </div>
+      {data.map((sameNameTasks, i) => {
+        return (
+          <div key={i}>
+            <li>
+              <div className="task">
+                <div className="task-name">
+                  {sameNameTasks.times.length > 1 ? (
+                    <span
+                      className="num-of-subtasks"
+                      style={{ cursor: "pointer", backgroundColor: "white" }}
+                      onClick={e => {
+                        const style = e.target.style;
+                        if (style.backgroundColor == "white") {
+                          style.backgroundColor = "GhostWhite";
+                          style.color = "green";
+                        } else {
+                          style.backgroundColor = "white";
+                          style.color = "black";
+                        }
+                        const element =
+                          e.currentTarget.parentElement.parentElement
+                            .parentElement.parentElement;
+                        if (element.childNodes[1].style.display === "none") {
+                          element.childNodes[1].style.display = "block";
+                        } else {
+                          element.childNodes[1].style.display = "none";
+                        }
+                      }}
+                    >
+                      {sameNameTasks.times.length}
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                  <span style={{ display: "flex", alignItems: "center" }}>
+                    {sameNameTasks.taskName}{" "}
+                  </span>
+                </div>
+                <div className="task-duration">
+                  {removeNaN(
+                    timeParser(sameNameTasks.sumTimeDif / 1000).hours,
+                    timeParser(sameNameTasks.sumTimeDif / 1000).minutes,
+                    timeParser(sameNameTasks.sumTimeDif / 1000).seconds
+                  )}
+                  <span
+                    style={{ color: "red", cursor: "pointer" }}
+                    onClick={event => {
+                      const element =
+                        event.target.parentElement.parentElement.parentElement
+                          .parentElement;
+                      if (element.childNodes[1].nodeName !== "#text") {
+                        element.childNodes[1].style.display = "none";
+                      }
 
-          <span
-            style={{ color: "red" }}
-            onClick={() => removeTask(task.taskId)}
-          >
-            X
-          </span>
-        </div>
-      </li>
-      {task.singleTask ? (
-        ""
-      ) : (
-        <div style={{ display: "none" }}>
-          {task.times.map((subTask, i) => {
-            return (
-              <SubList
-                key={i}
-                subTask={subTask}
-                task={task}
-                removeTask={removeTask}
-              />
-            );
-          })}
-        </div>
-      )}
+                      removeTask(sameNameTasks.taskId);
+                    }}
+                  >
+                    X
+                  </span>
+                </div>
+              </div>
+            </li>
+
+            {sameNameTasks.times.length <= 1 ? (
+              ""
+            ) : (
+              <div style={{ display: "none" }}>
+                {sameNameTasks.times.map((subTask, i) => {
+                  return (
+                    <SubList
+                      key={i}
+                      subTask={subTask}
+                      task={sameNameTasks}
+                      removeTask={removeTask}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
