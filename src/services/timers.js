@@ -28,35 +28,47 @@ export function timeParser(time) {
 }
 
 export function onTimerClick() {
+  // this is DashboardPage
+  this.startTimer = startTimer.bind(this);
+  this.stopTimer = stopTimer.bind(this);
   if (this.state.startTask) {
     // start timer
-    const interval = setInterval(() => {
-      localStorage.setItem("taskId", this.state.taskId);
-      localStorage.setItem("isActive", true );
-
-      this.setState(prevState => ({
-        timer: prevState.timer + 1
-      }));
-    }, 1000);
-
-    this.setState({
-      startTask: false,
-      startTime: Date.now(),
-      intervalId: interval
-    });
+    this.startTimer(this.state.taskName);
   } else {
     // stop timer
-    clearInterval(this.state.intervalId);
-    localStorage.setItem("isActive", false);
-    localStorage.removeItem("taskId")
-    console.log("timer stoped")
-    this.setState(()=>({
-      startTask: true,
-      endTime: Date.now(),
-      intervalId: "",
-      timer: 0
-    }))
+    this.stopTimer();
   }
+}
+
+export function startTimer(name) {
+  const interval = setInterval(() => {
+    localStorage.setItem("taskId", this.state.taskId);
+    localStorage.setItem("isActive", true);
+
+    this.setState(prevState => ({
+      timer: prevState.timer + 1
+    }));
+  }, 1000);
+
+  this.setState({
+    taskName: name,
+    startTask: false,
+    startTime: Date.now(),
+    intervalId: interval
+  });
+}
+
+export function stopTimer() {
+  clearInterval(this.state.intervalId);
+  localStorage.setItem("isActive", false);
+  localStorage.removeItem("taskId");
+  console.log("timer stoped");
+  this.setState(() => ({
+    startTask: true,
+    endTime: Date.now(),
+    intervalId: "",
+    timer: 0
+  }));
 }
 
 export function removeNaN(...data) {

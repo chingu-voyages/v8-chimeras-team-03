@@ -4,7 +4,12 @@ import logo from "../../assets/Group 10@2x.png";
 import logout from "../../assets/Logout  10@2x.png";
 import startButton from "../../assets/Group 44@2x.png";
 import stopButton from "../../assets/Group 47@2x.png";
-import { timeParser, onTimerClick } from "../../services/timers";
+import {
+  timeParser,
+  onTimerClick,
+  startTimer,
+  stopTimer
+} from "../../services/timers";
 import firebase, { auth } from "../../components/Firebase/firebase";
 import { dataPacking } from "../../services/dataPacking";
 import TaskList from "../../components/TaskList/TaskList";
@@ -17,6 +22,8 @@ class DashboardPage extends Component {
     super();
     this.onTimerClick = onTimerClick.bind(this);
     this.removeTask = removeTask.bind(this);
+    this.startTimer = startTimer.bind(this);
+    this.stopTimer = stopTimer.bind(this);
   }
   state = {
     startTask: true, // check if task should start or end
@@ -137,32 +144,9 @@ class DashboardPage extends Component {
   taskRestart = name => {
     if (!this.state.startTask) {
       // there is another task going
-      clearInterval(this.state.intervalId);
-      localStorage.setItem("isActive", false);
-      localStorage.removeItem("taskId");
-      console.log("timer stoped");
-      this.setState(() => ({
-        startTask: true,
-        endTime: Date.now(),
-        intervalId: "",
-        timer: 0
-      }));
+      this.stopTimer();
     }
-    const interval = setInterval(() => {
-      localStorage.setItem("taskId", this.state.taskId);
-      localStorage.setItem("isActive", true);
-
-      this.setState(prevState => ({
-        timer: prevState.timer + 1
-      }));
-    }, 1000);
-
-    this.setState({
-      taskName: name,
-      startTask: false,
-      startTime: Date.now(),
-      intervalId: interval
-    });
+    this.startTimer(name);
   };
 
   render() {
