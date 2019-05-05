@@ -1,0 +1,6 @@
+#sub-task-duration {
+  display: none;
+  @media screen and (min-width: 576px) {
+    display: block;
+  }
+}
