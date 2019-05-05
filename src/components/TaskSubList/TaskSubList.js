@@ -1,6 +1,7 @@
 import React from "react";
 import { timeParser, formatAMPM } from "../../services/timers";
 import { removeNaN } from "../../services/timers";
+import "./TaskSubList.scss";
 
 export default function SubList(props) {
   return (
@@ -16,11 +17,14 @@ export default function SubList(props) {
               {formatAMPM(new Date(props.subTask.endTime))}{" "}
             </span>
           )}
-          {removeNaN(
-            timeParser(props.subTask.timeDif / 1000).hours,
-            timeParser(props.subTask.timeDif / 1000).minutes,
-            timeParser(props.subTask.timeDif / 1000).seconds
-          )}
+          <span> </span>
+          <span id="sub-task-duration">
+            {removeNaN(
+              timeParser(props.subTask.timeDif / 1000).hours,
+              timeParser(props.subTask.timeDif / 1000).minutes,
+              timeParser(props.subTask.timeDif / 1000).seconds
+            )}
+          </span>
           <span
             style={{ cursor: "pointer", color: "red" }}
             onClick={() => {

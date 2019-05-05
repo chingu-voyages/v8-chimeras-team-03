@@ -116,6 +116,10 @@
         box-shadow: rgba($color: #000000, $alpha: 0.16) 0 3px 6px;
         .task:hover {
           background-color: ghostwhite;
+
+          #task-button {
+            visibility: visible;
+          }
         }
 
         .task {
@@ -131,9 +135,15 @@
           .task-name {
             display: flex;
             overflow: hidden;
-            width: 60vw;
+            width: 40vw;
+            @media screen and(min-width: 576px) {
+              width: 60vw;
+            }
           }
           .task-duration {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             span {
               margin-left: 10px;
             }
