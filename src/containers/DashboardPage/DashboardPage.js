@@ -109,8 +109,6 @@ class DashboardPage extends Component {
     const { hours, minutes, seconds } = timeParser(this.state.timer);
     const tasks = dataPacking(listofTasks);
 
-    console.log(listofTasks);
-
     return (
       <div className="dashboard">
         <Helmet>
