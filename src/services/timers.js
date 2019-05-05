@@ -31,6 +31,9 @@ export function onTimerClick() {
   if (this.state.startTask) {
     // start timer
     const interval = setInterval(() => {
+      localStorage.setItem("taskId", this.state.taskId);
+      localStorage.setItem("isActive", true );
+
       this.setState(prevState => ({
         timer: prevState.timer + 1
       }));
@@ -44,12 +47,15 @@ export function onTimerClick() {
   } else {
     // stop timer
     clearInterval(this.state.intervalId);
-    this.setState({
+    localStorage.setItem("isActive", false);
+    localStorage.removeItem("taskId")
+    console.log("timer stoped")
+    this.setState(()=>({
       startTask: true,
       endTime: Date.now(),
       intervalId: "",
       timer: 0
-    });
+    }))
   }
 }
 
