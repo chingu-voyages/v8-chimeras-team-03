@@ -62,7 +62,7 @@ export function stopTimer() {
   clearInterval(this.state.intervalId);
   localStorage.setItem("isActive", false);
   localStorage.removeItem("taskId");
-  console.log("timer stoped");
+
   this.setState(() => ({
     startTask: true,
     endTime: Date.now(),

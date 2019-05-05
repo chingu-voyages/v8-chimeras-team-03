@@ -67,7 +67,6 @@ class DashboardPage extends Component {
               var tasks = snapshot.val() || {};
               /// local storage
               var x;
-              console.log(localStorage.getItem("taskId") !== null);
               if (this.state.haveUnfinishedBusiness) {
                 this.setState(() => ({ haveUnfinishedBusiness: false }));
                 for (x in tasks) {
@@ -125,7 +124,6 @@ class DashboardPage extends Component {
       });
     }
     if (this.state.endTime !== prevState.endTime) {
-      console.log("update", "user", this.state.id, "task", this.state.taskId);
       firebase
         .database()
         .ref("tasks/" + this.state.id + "/" + this.state.taskId)
@@ -154,8 +152,6 @@ class DashboardPage extends Component {
     const { onTimerClick, onInputChange } = this;
     const { hours, minutes, seconds } = timeParser(this.state.timer);
     const tasks = dataPacking(listofTasks);
-
-    console.log(tasks);
 
     return (
       <div className="dashboard">
