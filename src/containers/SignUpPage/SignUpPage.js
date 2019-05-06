@@ -17,6 +17,7 @@ class SignUpPage extends Component {
       event.preventDefault();
       return;
     }
+    event.preventDefault();
     const { email, password } = this.state;
     try {
       await auth.createUserWithEmailAndPassword(email, password);
