@@ -1,7 +1,43 @@
 .num-of-subtasks {
-  border-radius: 50%;
-  padding: 2px;
-  border: 1px solid black;
-  background-color: rgba(100, 100, 100, 0.2);
-  margin-right: 40%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+  margin-left: 10px;
+  min-width: 25px;
+  min-height: 25px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.date {
+  font-size: 20px;
+  margin-top: 20px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px #e8e8e8 solid;
+  padding-bottom: 15px;
+}
+
+.date-time {
+  @media screen and (min-width: 768px) {
+    padding-right: 60px;
+  }
+}
+
+.sub-task-name {
+  display: block;
+  width: 30vw;
+  overflow: hidden;
+  align-items: center;
+  @media screen and (min-width: 576px) {
+    width: 40vw;
+    display: flex;
+  }
+}
+
+#sub-task {
+  justify-content: space-between;
 }

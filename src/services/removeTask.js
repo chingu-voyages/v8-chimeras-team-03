@@ -1,6 +1,14 @@
 import firebase from "../components/Firebase/firebase";
-export function removeTask(taskId) {
-  taskId.forEach(task => {
+import { stopTimer } from "./timers";
+export async function removeTask(taskId) {
+  this.stopTimer = stopTimer.bind(this);
+  console.log(taskId[0], this.state.taskId);
+  if (taskId[0] == this.state.taskId) {
+    // check if the task user wants to delete is currently beeing worked on
+    console.log("hey");
+    await this.stopTimer();
+  }
+  taskId.forEach((task, i) => {
     const url = "tasks/" + this.state.id + "/" + task;
 
     const deleteTask = firebase.database().ref(url);

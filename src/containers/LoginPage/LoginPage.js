@@ -24,7 +24,7 @@ class LoginPage extends Component {
     const { email, password } = event.target.elements;
     try {
       await auth.signInWithEmailAndPassword(email.value, password.value);
-      localStorage.setItem("IsLogged", true);
+      localStorage.setItem("isLogged", true);
       this.setState({
         redirect: true
       });

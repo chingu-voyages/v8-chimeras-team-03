@@ -4,7 +4,12 @@ import logo from "../../assets/Group 10@2x.png";
 import logout from "../../assets/Logout  10@2x.png";
 import startButton from "../../assets/Group 44@2x.png";
 import stopButton from "../../assets/Group 47@2x.png";
-import { timeParser, onTimerClick } from "../../services/timers";
+import {
+  timeParser,
+  onTimerClick,
+  startTimer,
+  stopTimer
+} from "../../services/timers";
 import firebase, { auth } from "../../components/Firebase/firebase";
 import { dataPacking } from "../../services/dataPacking";
 import TaskList from "../../components/TaskList/TaskList";
@@ -17,11 +22,16 @@ class DashboardPage extends Component {
     super();
     this.onTimerClick = onTimerClick.bind(this);
     this.removeTask = removeTask.bind(this);
+    this.startTimer = startTimer.bind(this);
+    this.stopTimer = stopTimer.bind(this);
   }
   state = {
     startTask: true, // check if task should start or end
     id: "", // mock for id
-    taskId: "",
+    taskId:
+      localStorage.getItem("taskId") !== null
+        ? localStorage.getItem("taskId")
+        : "",
     startTime: 0, // start time in miliseconds
     endTime: 0, // end time in milliseconds
     taskName: "",
@@ -33,6 +43,8 @@ class DashboardPage extends Component {
       seconds: "00"
     },
     loading: true,
+    haveUnfinishedBusiness:
+      localStorage.getItem("taskId") !== null ? true : false,
     listofTasks: {} // object that holds all task data
   };
   handleLogOut = async event => {
@@ -53,6 +65,30 @@ class DashboardPage extends Component {
             "value",
             snapshot => {
               var tasks = snapshot.val() || {};
+              /// local storage
+              var x;
+              if (this.state.haveUnfinishedBusiness) {
+                this.setState(() => ({ haveUnfinishedBusiness: false }));
+                for (x in tasks) {
+                  if (x === this.state.taskId) {
+                    this.setState(() => ({
+                      taskName: tasks[x].taskName,
+                      startTask: false,
+                      timer: Math.floor(Date.now() - tasks[x].startTime) / 1000
+                    }));
+                    // console.log("hello from comp will mount")
+                    const interval = setInterval(() => {
+                      this.setState(prevState => ({
+                        timer: prevState.timer + 1
+                      }));
+                    }, 1000);
+
+                    this.setState({
+                      intervalId: interval
+                    });
+                  }
+                }
+              }
               this.setState(() => {
                 return {
                   listofTasks: tasks,
@@ -92,7 +128,8 @@ class DashboardPage extends Component {
         .database()
         .ref("tasks/" + this.state.id + "/" + this.state.taskId)
         .update({
-          endTime: this.state.endTime
+          endTime: this.state.endTime,
+          taskName: this.state.taskName
         });
     }
   }
@@ -103,11 +140,18 @@ class DashboardPage extends Component {
     });
   };
 
+  taskRestart = name => {
+    if (!this.state.startTask) {
+      // there is another task going
+      this.stopTimer();
+    }
+    this.startTimer(name);
+  };
+
   render() {
     const { startTask, taskName, listofTasks, loading, timer } = this.state;
     const { onTimerClick, onInputChange } = this;
     const { hours, minutes, seconds } = timeParser(this.state.timer);
-
     const tasks = dataPacking(listofTasks);
 
     return (
@@ -165,6 +209,7 @@ class DashboardPage extends Component {
                   ? tasks.map((task, i) => {
                       return (
                         <TaskList
+                          taskRestart={this.taskRestart}
                           key={i}
                           task={task}
                           removeTask={this.removeTask}
